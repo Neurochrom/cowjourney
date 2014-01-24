@@ -23,6 +23,10 @@ window.onload = function(){
             this.x += 0.1;
             this.y += 0.1;
         });
+        background.addEventListener("touchend", function(){
+            this.x = 0;
+            this.y = 0;
+        });
     };
     game.start();
 };
