@@ -26,7 +26,10 @@ window.onload = function(){
         background.addEventListener("touchend", function(){
             this.x = 0;
             this.y = 0;
+            game.addLabel("Game Over", "#000", 0, 200);
         });
+
     };
+
     game.start();
 };
