@@ -1747,6 +1747,9 @@ enchant.Node = enchant.Class.create(enchant.EventTarget, {
 
         this._x = 0;
         this._y = 0;
+        
+        this._pos = new Vec2(0,0);
+        
         this._offsetX = 0;
         this._offsetY = 0;
 
@@ -1833,6 +1836,18 @@ enchant.Node = enchant.Class.create(enchant.EventTarget, {
         set: function(y) {
             this._y = y;
             this._dirty = true;
+        }
+    },
+    pos: {
+    	get: function() {
+    		this._pos.x = this._x;
+    		this._pos.y = this._y;
+    		return this._pos;
+    	},
+        set: function(v) {
+        	this._x = v.x;
+        	this._y = v.y;
+        	this._dirty = true;
         }
     },
     _updateCoordinate: function() {
