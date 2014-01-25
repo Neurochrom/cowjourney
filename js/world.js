@@ -45,8 +45,22 @@ var world = (function(){
                 console.log(i + ' ' + j);
                 var surface = new Surface(field_size.x, field_size.y);
                 surface.context.beginPath();
-                surface.context.arc(field_size.x / 2,field_size.x / 2,field_size.x / 2, 0, 2 * Math.PI);
-                surface.context.fillStyle = "#F3A312";
+                surface.context.rect(0,0,field_size.x, field_size.y);
+                switch(map[i][j]){
+                    case 0:
+                        surface.context.fillStyle = "#F3A312";
+                        break;
+                    case 1:
+                        surface.context.fillStyle = "#AE3132";
+                        break;
+                    case 2:
+                        surface.context.fillStyle = "#1276FE";
+                        break;
+                    case 5:
+                        surface.context.fillStyle = "#098A8A";
+                        break;
+
+                }
                 surface.context.fill();
                 var sprite = new Sprite(field_size.x, field_size.y);
                 sprite.image = surface;
