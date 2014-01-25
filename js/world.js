@@ -74,6 +74,10 @@ var world = (function(){
     this.pushPreload = function(str){
         this.preloadStack.push(str);
     };
+    this.toCallLaterStack = [];
+    this.callMeLater = function(el){
+        this.toCallLaterStack.push(el);
+    };
     this.start = function(){
         for (var i = 0; i < this.preloadStack.length; i ++){
             this.game.preload(this.preloadStack[i]);
@@ -85,6 +89,9 @@ var world = (function(){
                 [0,1,0,0],
                 [0,5,0,0]
             ]);
+            for (var i = 0; i < world.toCallLaterStack.length; i ++){
+                world.toCallLaterStack[i].toBeCalledLater();
+            }
         };
         this.game.start();
     }
