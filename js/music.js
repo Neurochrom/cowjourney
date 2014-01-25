@@ -38,8 +38,9 @@ function Music(){
             case g_SoundEffect.Cow:
                 var cows = ["res/cow.mp3",
                             "res/cow1.mp3",
-                            "res/cow2.mp3"];
-                world.game.assets[cows[Math.floor(Math.random()*2.999)]].clone().play();
+                            "res/cow2.mp3",
+                            "res/bark.mp3"];
+                world.game.assets[cows[Math.floor(Math.random()*3.999)]].clone().play();
                 break;
             case g_SoundEffect.Blood:
                 world.game.assets["res/bloody.mp3"].clone().play();

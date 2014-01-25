@@ -3,20 +3,24 @@ var TextSprite = Class.create(Label, {
     initialize : function()
     {
         Label.call(this);
-        this.font  = "24px monospace";
+        this.font  = "24px Comic Sans MS";
+        this.textAlign = "center";
         world.game.rootScene.addChild(this);
+
     },
 
-    show : function(text, p_center, p_move, p_lifespan, p_color)
+    show : function(text, p_center, p_dest, p_lifespan, p_color)
     {
         this.color = p_color;
-        this.pos = p_center;
+        this.text = text;
 
+        var centr = new Vec2(this.width/2, 24);
+        p_center = p_center.subV(centr);
+        p_dest = p_dest.subV(centr);
+        this.pos = p_center;
         this.m_Center = p_center;
         this.m_Life = p_lifespan;
-        this.m_Move = p_move;
-
-        this.text = text;
+        this.m_Dest = p_dest;
 
         this.m_ActLife = 0;
         this.m_Active = true;
@@ -31,7 +35,9 @@ var TextSprite = Class.create(Label, {
             this.m_Active = false;
             return;
         }
-        this.opacity = 1 - this.m_ActLife/this.m_Life;
+
+        this.pos = this.m_Center.addV( this.m_Dest.subV(this.m_Center).mulS(progress));
+        this.opacity = 1 - (1 - Math.cos(Math.PI/2 * this.m_ActLife/this.m_Life));
     },
 
 

@@ -21,12 +21,16 @@ world.registerOnClick({}, function(e, par){
     //part of game which will be run on start
     //first variable is a
     world.music.play(g_SoundEffect.Cow);
-    AddMessage();
+
+    if(Math.random() > 0.9)
+        AddMessage("MOOO!!! BITCH!!!", new Vec2(e.x, e.y), new Vec2(e.x, e.y-100), 80, "#FFF");
+    else
+        AddMessage("moo!", new Vec2(e.x, e.y), new Vec2(e.x, e.y-100), 80, "#FFF");
 
 });
 world.registerPreload('img/grass1.png');
 
-var AddMessage = function ()
+var AddMessage = function (text, p_center, p_dest, p_lifespan, p_color)
 {
     var closesToDie = 0;
     var closesID = 0;
@@ -43,8 +47,7 @@ var AddMessage = function ()
             closesID = i;
         }
     }
-
-    g_Messages[closesID].show("Cowssss", new Vec2(100,0), new Vec2(0,0), 100, "#FFF");
+    g_Messages[closesID].show(text, p_center, p_dest, p_lifespan, p_color);
 }
 
 var g_MaxMessages = 20;
