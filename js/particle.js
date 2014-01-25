@@ -33,9 +33,9 @@ function Particle(){
     {
         for (var i=0; i < m_PartCount / 5; i++)
         {
-            var moveX = Math.random()*10 - 5;
-            var moveY = Math.random()*10 - 5;
-            var lifeSpan = Math.random()*10 + 5;
+            var moveX = (Math.random() - 0.5) / 10;
+            var moveY = (Math.random() - 0.5)/ 10;
+            var lifeSpan = Math.random()*1005;
             this.system.addParticle(vec.x, vec.y, 0.5 + Math.random() * 0.5,
                 0.2 + Math.random() * 0.8, moveX, moveY, lifeSpan);
             //    this.m_Red2dot[this.m_Act].addParticle(vec.x, vec.y, 1, 1, moveX, moveY, lifeSpan);
