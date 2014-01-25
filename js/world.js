@@ -139,6 +139,11 @@ var world = (function(){
         this.game.preload("img/trees_4.png");
         this.game.preload("img/cow_animation.png");
         this.game.preload("img/cow_ass.png");
+        this.game.preload("img/cow_animation.png");
+        this.game.preload("img/cow_ass.png");
+        this.game.preload("img/beaver_animation.png");
+        this.game.preload("img/beaver_ass.png");
+
 
         for(var i = 0; i < this.preloadStash.length; i++){
             this.game.preload( this.preloadStash[i]);
