@@ -76,7 +76,6 @@ var Animal = Class.create(Sprite, {
             this.followedObject.groupie = this;
         }
     }
-
 });
 
 world.smell = function() {
@@ -126,17 +125,18 @@ world.resolveCollisions = function(colliding) {
     }
 };
 
-var pseudoPhysicalCol = function(a1, a2) {
+var stun = function(a1) {
     if(a1.type != "player_cow") {
         //a1.followedObject = null;
         if(a1.followedObject.type == "player_cow")
             a1.stunned = 60;
+        else
+            a1.stunned = 10;
     }
-    if(a2.type != "player_cow") {
-        //a2.followedObject = null;
-        if(a1.followedObject.type == "player_cow")
-            a2.stunned = 60;
-    }
+}
+var pseudoPhysicalCol = function(a1, a2) {
+    stun(a1);
+    stun(a2);
 
     var to = a1.center().subV(a2.center());
     var n = new Vec2(to.x, to.y);
