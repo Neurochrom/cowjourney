@@ -71,7 +71,6 @@ var world = (function(){
 
                 sprite.pos = field_size.mulV(new Vec2(j * (1 - padding),i * (1 - padding)));
                 this.game.rootScene.addChild(sprite);
-
             }
         }
     };
@@ -98,14 +97,16 @@ var world = (function(){
             });
             background.addEventListener("enterframe", function(){
                 ParticleSystem.update();
+                var sensing = world.smell();
             });
             background.width = world.size.x;
             background.height = world.size.y;
             world.game.rootScene.addChild(background);
-            var a1 = new Animal(64, 64, world.game.assets["img/cow_atlas.png"], new Vec2(30, 30), 60, 320);
-            a1.speed = new Vec2(1, 1);
+            var a1 = new Player(64, 64, world.game.assets["img/cow_atlas.png"], new Vec2(30, 30), 60, 320);
+            a1.type = "player_cow";
+            var a2 = new Animal(64, 64, world.game.assets["img/cow_atlas.png"], new Vec2(30, 130), 60, 320);
 
-                world.readMap([
+            world.readMap([
                     [0,0,0,0,0,0,0],
                     [0,3,4,4,2,0,0],
                     [0,0,0,0,0,0,1],
