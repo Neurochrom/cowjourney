@@ -27,24 +27,31 @@ function getHeight(){
 
 
 var world = (function(){
+
     this.game = null;
+
     this.init = function(game){
         this.game = game;
     };
+
     this.size = new Vec2(getWidth(), getHeight());
     this.animals = [];
     this.obstacles = {};
+
     this.addAnimal = function(animal){
         this.animals.push(animal);
         this.game.rootScene.addChild(animal);
     };
+
     this.isObstacleAt = function(pos){
         var p = pos.divV(this.field_size);
         if(this.obstacles[Math.floor(p.y)] && this.obstacles[Math.floor(p.y)][Math.floor(p.x)])
                 return true;
         return false;
     };
+
     this.field_size = null;
+
     this.readMap = function(map){
         var maps_size = new Vec2(map[0].length, map.length);
         this.field_size = this.size.divV(maps_size);
@@ -84,6 +91,7 @@ var world = (function(){
             }
         }
     };
+
     this.par = null;
     this.music = null;
     this.start = function(){
