@@ -1,4 +1,4 @@
-var Particle = Class.create( {
+var Particle = Class.create(Entity, {
     initialize : function(center) {
 
         // preparing particle sets
