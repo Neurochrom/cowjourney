@@ -104,6 +104,11 @@ var world = (function(){
         this.onStartStash.push({fun: item, par: param});
     }
 
+    this.preloadStash = [];
+    this.registerPreloadStash = function(item){
+        this.preloadStash.push(item);
+    }
+
 
 
     this.smell = function() {
@@ -176,6 +181,10 @@ var world = (function(){
         this.game.preload("img/trees_2.png");
         this.game.preload("img/trees_3.png");
         this.game.preload("img/trees_4.png");
+
+        for(var i = 0; i < this.preloadStash.length; i++){
+            this.game.preload( this.preloadStash[i]);
+        }
 
         world.game.onload = function(){
             // temp adding of animals here
