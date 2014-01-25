@@ -1,4 +1,5 @@
 var Animal = Class.create(Sprite, {
+
     initialize : function(width, height, image, pos, rCol, rSense) {
         Sprite.call(this, width, height);
 
@@ -36,12 +37,17 @@ var Animal = Class.create(Sprite, {
         });
         world.addAnimal(this);
     },
-    center: function() { return this.pos.addV(new Vec2(this.width*0.5, this.height*0.5)); },
+
+    center: function() {
+        return this.pos.addV(new Vec2(this.width*0.5, this.height*0.5));
+    },
+
     rCol : 0,
     rSense : 0,
     vel : "x",
     followedObject : null,
     type : "cow",
+
     smell: function(a) {
         this.followedObject = a;
     }
@@ -52,6 +58,3 @@ var Player = Class.create(Animal, {
         var xxx=2;
     }
 });
-
-
-

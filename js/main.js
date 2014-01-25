@@ -4,6 +4,7 @@ Sprite.prototype.setPosV = function(vec_) {
     this.x = vec_.x;
     this.y = vec_.y;
 };
+
 Sprite.prototype.addToPosV = function(vec_) {
     this.x += vec_.x;
     this.y += vec_.y;
@@ -19,3 +20,4 @@ window.onload = function(){
     var par = Particle();
     world.start();
  }
+ 
