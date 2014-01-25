@@ -1,14 +1,9 @@
 function Particle(){
-    this.init = function() {
-
-        world.pushPreload("img/red1dot.png");
-        world.pushPreload("img/red2dot.png");
-        world.pushPreload("img/red3dot.png");
-        world.pushPreload("img/simpleparticle.png");
-
-        world.callMeLater(this);
-    };
-    this.toBeCalledLater = function(){
+    this.preload = ["img/red1dot.png"
+        ,"img/red2dot.png"
+        ,"img/red3dot.png"
+        ,"img/simpleparticle.png"];
+    this.init = function(){
         // preparing particle sets
         this.system = ParticleSystem.createParticleSystem(world.game.rootScene,
             world.game.assets["img/red1dot.png"],
@@ -47,5 +42,4 @@ function Particle(){
     };
     // particle count
     var m_PartCount = 50;
-    this.init();
 };
