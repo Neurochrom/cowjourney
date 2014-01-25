@@ -5,7 +5,7 @@ var TextSprite = Class.create(Label, {
         Label.call(this);
         this.font  = "24px Comic Sans MS";
         this.textAlign = "center";
-        world.game.rootScene.addChild(this);
+        world.scene.addChild(this);
 
     },
 

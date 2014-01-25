@@ -7,7 +7,7 @@ function Particle(){
 
     this.init = function(){
         // preparing particle sets
-        this.system = ParticleSystem.createParticleSystem(world.game.rootScene,
+        this.system = ParticleSystem.createParticleSystem(world.scene,
             world.game.assets["img/red1dot.png"],
             32, 32, m_PartCount);
     };
