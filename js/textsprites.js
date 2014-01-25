@@ -1,9 +1,14 @@
 var TextSprite = Class.create(Label, {
 
-    initialize : function(text, p_center, p_move, p_lifespan, p_color)
+    initialize : function()
     {
-        Label.call(this, text);
+        Label.call(this);
         this.font  = "24px monospace";
+        world.game.rootScene.addChild(this);
+    },
+
+    show : function(text, p_center, p_move, p_lifespan, p_color)
+    {
         this.color = p_color;
         this.pos = p_center;
 
@@ -11,13 +16,21 @@ var TextSprite = Class.create(Label, {
         this.m_Life = p_lifespan;
         this.m_Move = p_move;
 
-        world.game.rootScene.addChild(this);
+        this.text = text;
+
+        this.m_ActLife = 0;
+        this.m_Active = true;
     },
 
     update : function(e)
     {
         this.m_ActLife++;
         var progress = this.m_ActLife/this.m_Life;
+        if(progress > 1)
+        {
+            this.m_Active = false;
+            return;
+        }
         this.opacity = 1 - this.m_ActLife/this.m_Life;
     },
 
