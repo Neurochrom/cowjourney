@@ -17,12 +17,21 @@ var Animal = Class.create(Sprite, {
 
         this.addEventListener("enterframe", function(){
             this.pos = this.pos.addV(this.speed);
-            this.speed = this.speed.mulS(this.speed.lengthSqr() > this.rCol ? 0.91 : 0.9999995);
+            //this.speed = this.speed.mulS(this.speed.lengthSqr() > this.rCol ? 0.91 : 0.9999995);
+            if (this.followedObject) {
+                this.speed = this.followedObject.center().subV(this.pos);
+                this.speed.normalize();
+            } else {
+                this.speed = this.speed.mulS(0);
+            }
         });
         world.addAnimal(this);
     },
     rCol : 0,
     rSense : 0,
     vel : "x",
-    followedObject : {}
+    followedObject : null
 });
+
+
+
