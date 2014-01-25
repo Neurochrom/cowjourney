@@ -27,10 +27,10 @@ function getHeight(){
 
 
 var world = (function(){
+    this.game = null;
     this.init = function(game){
         this.game = game;
     };
-    this.game = null;
     this.size = new Vec2(getWidth(), getHeight());
     this.animals = [];
     this.addAnimal = function(animal){
@@ -42,11 +42,12 @@ var world = (function(){
         var field_size = this.size.divV(maps_size);
         for(var i = 0; i < map.length; i++){
             for(var j = 0; j < map[i].length; j++){
-
+                console.log(i + ' ' + j);
                 var surface = new Surface(field_size.x, field_size.y);
                 surface.context.beginPath();
-                surface.context.fillRect(0,1,2,3);
+                surface.context.arc(field_size.x / 2,field_size.x / 2,field_size.x / 2, 0, 2 * Math.PI);
                 surface.context.fillStyle = "#F3A312";
+                surface.context.fill();
                 var sprite = new Sprite(field_size.x, field_size.y);
                 sprite.image = surface;
                 sprite.pos = field_size.mulV(new Vec2(i,j));
@@ -61,12 +62,14 @@ var world = (function(){
 
     };
     this.start = function(){
-        this.readMap([
-            [0,1,0,0],
-            [0,2,0,0],
-            [0,1,0,0],
-            [0,5,0,0]
-        ]);
+        this.game.onload = function(){
+            world.readMap([
+                [0,1,0,0],
+                [0,2,0,0],
+                [0,1,0,0],
+                [0,5,0,0]
+            ]);
+        };
         this.game.start();
     }
     return this;
