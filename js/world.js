@@ -104,6 +104,17 @@ var world = (function(){
         this.onStartStash.push({fun: item, par: param});
     }
 
+    this.onUpdateStash = [];
+    this.registerOnUpdate = function(param, item){
+        this.onUpdateStash.push({fun: item, par: param});
+    }
+
+
+    this.onClickStash = [];
+    this.registerOnClick = function(param, item){
+        this.onClickStash.push({fun: item, par: param});
+    }
+
     this.preloadStash = [];
     this.registerPreload = function(item){
         this.preloadStash.push(item);
@@ -195,8 +206,11 @@ var world = (function(){
             background.addEventListener('touchstart', function(e) {
                 world.par.blood(new Vec2(e.x-12, e.y-12));
                 a1.followedObject = { center: function() { return new Vec2(e.x, e.y); } };
+                for(var i = 0; i < world.onClickStash.length; i++){
+                    world.onClickStash[i].fun(e, world.onClickStash[i].par);
+                }
 
-                music.play(g_SoundEffect.Cow);
+                //music.play(g_SoundEffect.Cow);
             });
 
             background.addEventListener("enterframe", function(){
@@ -204,6 +218,9 @@ var world = (function(){
                 // music.update();
                 world.smell();
                 world.resolveCollisions(world.findCollidingPairs());
+                for(var i = 0; i < world.onUpdateStash.length; i++){
+                    world.onUpdateStash[i].fun(world.onUpdateStash[i].par);
+                }
             });
 
             background.width = world.size.x;
