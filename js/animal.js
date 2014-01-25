@@ -2,18 +2,15 @@ var Animal = Class.create(Sprite, {
     initialize : function(width, height, atlasName, pos, rCol, rSense) {
         Sprite.call(this, width, height);
 
-        this.rCol = r;
+        this.rCol = rCol;
         this.speed = Vec2(0, 0);
 
         var surface = new Surface(width, height);
 
 
         surface.context.beginPath();
-        surface.context.arc(r, r, r, 0, Math.PI * 2);
-        if(owner)
-            surface.context.fillStyle = owner.ballColor;
-        else
-            surface.context.fillStyle = "#F3A312";
+        surface.context.arc(rCol, rCol, rCol, 0, Math.PI * 2);
+        surface.context.fillStyle = "#F3A312";
         surface.context.fill();
         this.image = surface;
 
