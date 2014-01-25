@@ -1,3 +1,5 @@
+var headLevel = 18;
+
 var Animal = Class.create(Sprite, {
 
     initialize : function(width, height, image, pos, rCol, rSense) {
@@ -14,9 +16,20 @@ var Animal = Class.create(Sprite, {
         surface.context.fill();
         this.image = surface;
         */
+
         this.image = image;
         this.frame = 0;
         this.pos = pos;
+
+        this.rotationDiv = Math.random() * 10 + 15;
+        this.rotationMul = Math.random() * 0.2 + 0.2;
+
+        this.ass = new Sprite(width, height);
+        this.ass.image = world.game.assets["img/cow_ass.png"];
+        this.ass.pos = this.pos.addV(new Vec2(0,headLevel));
+        world.addAnimalsAss(this.ass);
+        world.addAnimal(this);
+
 
         this.addEventListener("enterframe", function(){
             if(this.followedObject){
@@ -50,10 +63,16 @@ var Animal = Class.create(Sprite, {
                 //this.speed = this.speed.mulS(0);
             }
 
-            this.frame = (this.age + Math.random()*4) % 40  < 4 ? 1 : 0;
+            this.frame += (this.age % 5 == 0) ? 1 : 0;
+            if(this.frame > 10) this.frame = 0;
+            this.ass.pos = this.pos.subV(this.speed.mulV(this.speed.mulV(this.speed))).addV(new Vec2(0,headLevel));
+            this.rotate((Math.sin(this.age/this.rotationDiv - this.rotationDiv / 2)*this.rotationMul));
+            var tmp = this.speed.length();
+            this.ass.rotate(0.2 * Math.sin(tmp * this.age * 10));
+
         });
-        world.addAnimal(this);
     },
+    ass : null,
 
     center: function() {
         return this.pos.addV(new Vec2(this.width*0.5, this.height*0.5));

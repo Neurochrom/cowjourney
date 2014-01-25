@@ -45,6 +45,9 @@ var world = (function(){
         this.animals.push(animal);
         this.scene.addChild(animal);
     };
+    this.addAnimalsAss = function(ass){
+        this.game.rootScene.addChild(ass);
+    };
 
     this.isObstacleAt = function(pos){
         var p = pos.divV(this.field_size);
@@ -135,6 +138,8 @@ var world = (function(){
         this.game.preload("img/trees_2.png");
         this.game.preload("img/trees_3.png");
         this.game.preload("img/trees_4.png");
+        this.game.preload("img/cow_animation.png");
+        this.game.preload("img/cow_ass.png");
 
         for(var i = 0; i < this.preloadStash.length; i++){
             this.game.preload( this.preloadStash[i]);
