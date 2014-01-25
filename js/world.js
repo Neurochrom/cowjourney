@@ -44,28 +44,28 @@ var world = (function(){
         for(var i = 0; i < map.length; i++){
             this.obstacles[i] = [];
             for(var j = 0; j < map[i].length; j++){
-                var color;
+                var path;
                 switch(map[i][j]){
                     case 0:
                         continue;
                         break;
                     case 1:
-                        color = "#AE3132";
+                        path = 'trees_1.png'
                         break;
                     case 2:
-                        color = "#1276FE";
+                        path = 'trees_2.png'
                         break;
-                    case 5:
-                        color = "#098A8A";
+                    case 3:
+                        path = 'trees_3.png'
+                        break;
+                    case 4:
+                        path = 'trees_4.png'
                         break;
                 }
-                var surface = new Surface(field_size.x, field_size.y);
-                surface.context.beginPath();
-                surface.context.fillStyle = color;
-                surface.context.rect(0,0,field_size.x, field_size.y);
-                surface.context.fill();
                 var sprite = new Sprite(field_size.x, field_size.y);
-                sprite.image = surface;
+                sprite.image = world.game.assets['img/' + path];
+                sprite.width = field_size.x;
+                sprite.height = field_size.y;
                 sprite.pos = field_size.mulV(new Vec2(i,j));
                 this.game.rootScene.addChild(sprite);
 
@@ -78,6 +78,10 @@ var world = (function(){
         this.game.preload(this.par.preload);
         this.game.preload("img/cow_atlas.png");
         this.game.preload("img/grass2.png");
+        this.game.preload("img/trees_1.png");
+        this.game.preload("img/trees_2.png");
+        this.game.preload("img/trees_3.png");
+        this.game.preload("img/trees_4.png");
 
         world.game.onload = function(){
             // temp adding of animals here
@@ -99,10 +103,12 @@ var world = (function(){
             a1.speed = new Vec2(1, 1);
 
                 world.readMap([
-                    [0,1,0,0],
-                    [0,0,0,1],
-                    [0,1,0,2],
-                    [0,5,0,0]
+                    [0,0,0,0,0,0,0],
+                    [0,2,4,4,3,0,0],
+                    [0,0,0,0,0,0,1],
+                    [0,1,0,0,1,0,0],
+                    [0,0,1,0,0,0,0],
+                    [0,0,0,0,0,0,0]
                 ]);
             world.par.init();
 
