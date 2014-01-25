@@ -33,6 +33,7 @@ var world = (function(){
     };
     this.size = new Vec2(getWidth(), getHeight());
     this.animals = [];
+    this.obstacles = [];
     this.addAnimal = function(animal){
         this.animals.push(animal);
         this.game.rootScene.addChild(animal);
@@ -41,8 +42,8 @@ var world = (function(){
         var maps_size = new Vec2(map.length, map[0].length);
         var field_size = this.size.divV(maps_size);
         for(var i = 0; i < map.length; i++){
+            this.obstacles[i] = [];
             for(var j = 0; j < map[i].length; j++){
-                console.log(i + ' ' + j);
                 var surface = new Surface(field_size.x, field_size.y);
                 surface.context.beginPath();
                 surface.context.rect(0,0,field_size.x, field_size.y);
@@ -66,20 +67,21 @@ var world = (function(){
                 sprite.image = surface;
                 sprite.pos = field_size.mulV(new Vec2(i,j));
                 this.game.rootScene.addChild(sprite);
-
             }
-
-
-
         }
-
-
+    };
+    this.preloadStack = [];
+    this.pushPreload = function(str){
+        this.preloadStack.push(str);
     };
     this.start = function(){
+        for (var i = 0; i < this.preloadStack.length; i ++){
+            this.game.preload(this.preloadStack[i]);
+        }
         this.game.onload = function(){
             world.readMap([
                 [0,1,0,0],
-                [0,2,0,0],
+                [0,2,0,1],
                 [0,1,0,0],
                 [0,5,0,0]
             ]);
