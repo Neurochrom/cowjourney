@@ -60,19 +60,26 @@ var world = (function(){
                     case 5:
                         surface.context.fillStyle = "#098A8A";
                         break;
-
                 }
                 surface.context.fill();
                 var sprite = new Sprite(field_size.x, field_size.y);
                 sprite.image = surface;
                 sprite.pos = field_size.mulV(new Vec2(i,j));
+                sprite.addEventListener("touchend",function(e){
+                    world.par.blood(new Vec2(e.x, e.y));
+                });
+                sprite.addEventListener("enterframe", function(){
+                    ParticleSystem.update();
+                });
                 this.game.rootScene.addChild(sprite);
+
             }
         }
     };
+    this.par;
     this.start = function(){
-        var par = new Particle();
-        this.game.preload(par.preload);
+        this.par = new Particle();
+        this.game.preload(this.par.preload);
         this.game.onload = function(){
             world.readMap([
                 [0,1,0,0],
@@ -80,9 +87,8 @@ var world = (function(){
                 [0,1,0,0],
                 [0,5,0,0]
             ]);
-            //par.init();
 
-            // Add animals here
+            // temp adding of animals here
             var a1 = new Animal(64, 64, "img/cow_atlas.png", new Vec2(120, 120), 60, 320);
             a1.speed = new Vec2(1, 1);
 
@@ -104,10 +110,8 @@ var world = (function(){
             background.addEventListener('touchend', background.touchend);
             background.addEventListener('touchmove', background.touchmove);
             world.game.rootScene.addChild(background);
+            this.par.init();
 
-            //for (var i = 0; i < world.toCallLaterStack.length; i ++){
-            //    world.toCallLaterStack[i].toBeCalledLater();
-            //}
         };
         this.game.start();
     }

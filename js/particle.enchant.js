@@ -37,10 +37,6 @@ var ParticleSystem = {
                 p.opacity = opacity;
                 p.lifeSpan = lifeSpan;
                 this.scene.addChild(p);
-                p.addEventListener("enterframe", function(){
-                    ParticleSystem.update();
-                });
-                this.activeCount = this.activeCount + 1;
                 break;
             }
         }
@@ -53,7 +49,6 @@ var ParticleSystem = {
                 if (p.particleLive>p.lifeSpan) {
                     this.scene.removeChild(p);
                     p.particleActive = false;
-                    this.activeCount = this.activeCount - 1;
                 } else {
                     p.x = p.x + p.particleMoveX;
                     p.y = p.y + p.particleMoveY;

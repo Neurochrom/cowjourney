@@ -8,10 +8,6 @@ function Particle(){
         this.system = ParticleSystem.createParticleSystem(world.game.rootScene,
             world.game.assets["img/red1dot.png"],
             32, 32, m_PartCount);
-
-        this.addEventListener("enterframe", function(){
-            this.system.update();
-        });
     };
     this.system = null;
     this.update = function()
