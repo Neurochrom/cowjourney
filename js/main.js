@@ -31,5 +31,8 @@ window.onload = function(){
 
     };
 
+    var testAnimal = new Animal(64, 64, "test", Vec2(120, 120), 32, 64);
+    testAnimal.speed = Vec2(-0.1,-0.1);
+
     game.start();
 };
