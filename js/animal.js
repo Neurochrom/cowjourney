@@ -8,14 +8,6 @@ var Animal = Class.create(Sprite, {
         this.rCol = rCol;
         this.rSense = rSense;
         this.speed = new Vec2(0, 0);
-        /*
-        var surface = new Surface(width, height);
-        surface.context.beginPath();
-        surface.context.arc(rCol, rCol, rCol, 0, Math.PI * 2);
-        surface.context.fillStyle = "#FF1133";
-        surface.context.fill();
-        this.image = surface;
-        */
 
         this.image = image;
         this.frame = 0;
@@ -86,14 +78,6 @@ var Animal = Class.create(Sprite, {
     type : "cow",
     groupie: null,
     smell: function(a) {
-        if(this.followedObject) {
-        }
-        else {
-            this.followedObject = a;
-            while(this.followedObject.groupie)
-                this.followedObject = this.followedObject.groupie;
-            this.followedObject.groupie = this;
-        }
     }
 });
 
@@ -172,8 +156,4 @@ var pseudoPhysicalCol = function(a1, a2) {
     a2.speed = a2.speed.addV(j.divS(m2*1.3));
 };
 
-var Player = Class.create(Animal, {
-    smell : function(a) {
-        var xxx=2;
-    }
-});
+
