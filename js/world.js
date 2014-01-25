@@ -76,10 +76,11 @@ var world = (function(){
     this.start = function(){
         this.par = new Particle();
         this.game.preload(this.par.preload);
+        this.game.preload("img/cow_atlas.png");
 
         world.game.onload = function(){
             // temp adding of animals here
-            var a1 = new Animal(64, 64, "img/cow_atlas.png", new Vec2(120, 120), 60, 320);
+            var a1 = new Animal(64, 64, world.game.assets["img/cow_atlas.png"], new Vec2(30, 30), 60, 320);
             a1.speed = new Vec2(1, 1);
 
             // A background for touch event handling

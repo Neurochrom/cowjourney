@@ -1,5 +1,5 @@
 var Animal = Class.create(Sprite, {
-    initialize : function(width, height, atlasName, pos, rCol, rSense) {
+    initialize : function(width, height, image, pos, rCol, rSense) {
         Sprite.call(this, width, height);
 
         this.rCol = rCol;
@@ -13,7 +13,7 @@ var Animal = Class.create(Sprite, {
         surface.context.fill();
         this.image = surface;
         */
-        this.image = world.game.assets[atlasName];
+        this.image = image;
         this.frame = 0;
         this.pos = pos;
 
