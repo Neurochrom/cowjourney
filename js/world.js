@@ -97,14 +97,15 @@ var world = (function(){
             });
             background.addEventListener("enterframe", function(){
                 ParticleSystem.update();
-                var sensing = world.smell();
+                world.smell();
+                world.resolveCollisions(world.findCollidingPairs());
             });
             background.width = world.size.x;
             background.height = world.size.y;
             world.game.rootScene.addChild(background);
-            var a1 = new Player(64, 64, world.game.assets["img/cow_atlas.png"], new Vec2(30, 30), 60, 320);
+            var a1 = new Player(64, 64, world.game.assets["img/cow_atlas.png"], new Vec2(30, 30), 30, 320);
             a1.type = "player_cow";
-            var a2 = new Animal(64, 64, world.game.assets["img/cow_atlas.png"], new Vec2(30, 130), 60, 320);
+            var a2 = new Animal(64, 64, world.game.assets["img/cow_atlas.png"], new Vec2(30, 130), 30, 320);
 
             world.readMap([
                     [0,0,0,0,0,0,0],
