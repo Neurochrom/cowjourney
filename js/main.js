@@ -14,5 +14,6 @@ window.onload = function(){
     game.fps = 60;
     // Particle graphic
     world.init(game);
+    var par = Particle();
     world.start();
  }
