@@ -33,16 +33,23 @@ var world = (function(){
     };
     this.size = new Vec2(getWidth(), getHeight());
     this.animals = [];
-    this.obstacles = [];
+    this.obstacles = {};
     this.addAnimal = function(animal){
         this.animals.push(animal);
         this.game.rootScene.addChild(animal);
     };
+    this.isObstacleAt = function(pos){
+        var p = pos.divV(this.field_size);
+        if(this.obstacles[Math.floor(p.y)] && this.obstacles[Math.floor(p.y)][Math.floor(p.x)])
+                return true;
+        return false;
+    };
+    this.field_size = null;
     this.readMap = function(map){
         var maps_size = new Vec2(map[0].length, map.length);
-        var field_size = this.size.divV(maps_size);
+        this.field_size = this.size.divV(maps_size);
         for(var i = 0; i < map.length; i++){
-            this.obstacles[i] = [];
+            this.obstacles[i] = {};
             for(var j = 0; j < map[i].length; j++){
                 var path;
                 switch(map[i][j]){
@@ -66,18 +73,24 @@ var world = (function(){
                 var img = world.game.assets['img/' + path];
                 var sprite = new Sprite(img.width, img.height);
                 sprite.image = img;
-                var paddedField = field_size.mulS(1 + padding * 2);
-               sprite.scale(paddedField.x / img.width, paddedField.y / img.height);
+                var paddedField = this.field_size.mulS(1 + padding * 2);
+                sprite.scale(paddedField.x / img.width, paddedField.y / img.height);
 
-                sprite.pos = field_size.mulV(new Vec2(j * (1 - padding),i * (1 - padding)));
+                sprite.pos = this.field_size.mulV(new Vec2(j * (1 - padding),i * (1 - padding)));
+                this.obstacles[i][j] = sprite;
+
+
                 this.game.rootScene.addChild(sprite);
             }
         }
     };
-    this.par;
+    this.par = null;
+    this.music = null;
     this.start = function(){
         this.par = new Particle();
+        this.music = new Music();
         this.game.preload(this.par.preload);
+        this.game.preload(this.music.preload);
         this.game.preload("img/cow_atlas.png");
         this.game.preload("img/grass2.png");
         this.game.preload("img/trees_1.png");
@@ -97,6 +110,7 @@ var world = (function(){
             });
             background.addEventListener("enterframe", function(){
                 ParticleSystem.update();
+                music.update();
                 world.smell();
                 world.resolveCollisions(world.findCollidingPairs());
             });
@@ -114,6 +128,7 @@ var world = (function(){
                     [0,1,0,0,1,0,0]
                 ]);
             world.par.init();
+            world.music.init();
 
         };
         this.game.start();

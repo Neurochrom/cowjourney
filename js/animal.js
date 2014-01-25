@@ -18,6 +18,11 @@ var Animal = Class.create(Sprite, {
         this.pos = pos;
 
         this.addEventListener("enterframe", function(){
+            if((this.followedObject) && (world.isObstacleAt(this.pos.addV(this.speed)))){
+                //We might have done it more complex
+                this.followedObject = null;
+                this.speed = this.speed.mulS(0);
+            }
             this.pos = this.pos.addV(this.speed);
             //this.speed = this.speed.mulS(this.speed.lengthSqr() > this.rCol ? 0.91 : 0.9999995);
             if (this.followedObject) {
