@@ -46,6 +46,7 @@ window.onload = function(){
                 particleSystem.addParticle(particleX, particleY, 1, 1, moveX, moveY, lifeSpan);
             }
         }
+        world.start();
     };
 
     var testAnimal = new Animal(64, 64, "test", Vec2(120, 120), 32, 64);

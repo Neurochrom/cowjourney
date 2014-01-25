@@ -41,7 +41,7 @@ var Animal = Class.create(Sprite, {
         this.futureSpeed = new Vec2(0,0);
     },
     rCol : 0,
-    rSense : 0;
-    speed : Vec2(0,0);
-    followedObject : {};
+    rSense : 0,
+    speed : Vec2(0,0),
+    followedObject : {}
 });
