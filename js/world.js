@@ -65,12 +65,6 @@ var world = (function(){
                 var sprite = new Sprite(field_size.x, field_size.y);
                 sprite.image = surface;
                 sprite.pos = field_size.mulV(new Vec2(i,j));
-                sprite.addEventListener("touchend",function(e){
-                    world.par.blood(new Vec2(e.x, e.y));
-                });
-                sprite.addEventListener("enterframe", function(){
-                    ParticleSystem.update();
-                });
                 this.game.rootScene.addChild(sprite);
 
             }
@@ -94,23 +88,17 @@ var world = (function(){
 
             // A background for touch event handling
             var background = new Entity();
-            background.touchstart = function (e) {
-                console.log("touchstart " + e.x);
+            background.addEventListener('touchstart', function(e) {
+                world.par.blood(new Vec2(e.x-12, e.y-12));
                 a1.followedObject = { center: function() { return new Vec2(e.x, e.y); } };
-            };
-            background.touchend = function (e) {
-                console.log("touchend " + e.x);
-            };
-            background.touchmove = function (e) {
-                console.log("touchmove " + e.x);
-            };
+            });
+            background.addEventListener("enterframe", function(){
+                ParticleSystem.update();
+            });
             background.width = world.size.x;
             background.height = world.size.y;
-            background.addEventListener('touchstart', background.touchstart);
-            background.addEventListener('touchend', background.touchend);
-            background.addEventListener('touchmove', background.touchmove);
             world.game.rootScene.addChild(background);
-            this.par.init();
+            world.par.init();
 
         };
         this.game.start();
