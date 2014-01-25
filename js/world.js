@@ -39,7 +39,7 @@ var world = (function(){
         this.game.rootScene.addChild(animal);
     };
     this.readMap = function(map){
-        var maps_size = new Vec2(map.length, map[0].length);
+        var maps_size = new Vec2(map[0].length, map.length);
         var field_size = this.size.divV(maps_size);
         for(var i = 0; i < map.length; i++){
             this.obstacles[i] = [];
@@ -66,7 +66,7 @@ var world = (function(){
                 sprite.image = world.game.assets['img/' + path];
                 sprite.width = field_size.x;
                 sprite.height = field_size.y;
-                sprite.pos = field_size.mulV(new Vec2(i,j));
+                sprite.pos = field_size.mulV(new Vec2(j,i));
                 this.game.rootScene.addChild(sprite);
 
             }
@@ -104,11 +104,9 @@ var world = (function(){
 
                 world.readMap([
                     [0,0,0,0,0,0,0],
-                    [0,2,4,4,3,0,0],
+                    [0,3,4,4,2,0,0],
                     [0,0,0,0,0,0,1],
-                    [0,1,0,0,1,0,0],
-                    [0,0,1,0,0,0,0],
-                    [0,0,0,0,0,0,0]
+                    [0,1,0,0,1,0,0]
                 ]);
             world.par.init();
 
