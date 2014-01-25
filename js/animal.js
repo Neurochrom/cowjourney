@@ -52,7 +52,19 @@ var Animal = Class.create(Sprite, {
     smell: function(a) {
         this.followedObject = a;
     }
+
 });
+
+var pseudoPhysicalCol = function(a1, a2) {
+    if(a1.type != "player_cow") {
+        a1.followedObject = null;
+        a1.stunned = 60;
+    }
+    if(a2.type != "player_cow") {
+        a2.followedObject = null;
+        a2.stunned = 60;
+    }
+};
 
 var Player = Class.create(Animal, {
     smell : function(a) {

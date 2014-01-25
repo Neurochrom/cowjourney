@@ -56,14 +56,7 @@ window.onload = function(){
         for (var i=0; i<colliding.length; ++i) {
             var a1 = colliding[i][0];
             var a2 = colliding[i][1];
-            if(a1.type != "player_cow") {
-                a1.followedObject = null;
-                a1.stunned = 60;
-            }
-            if(a2.type != "player_cow") {
-                a2.followedObject = null;
-                a2.stunned = 60;
-            }
+            pseudoPhysicalCol(a1,a2);
         }
     };
 
