@@ -1,15 +1,19 @@
 function Particle(){
+
     this.preload = ["img/red1dot.png"
         ,"img/red2dot.png"
         ,"img/red3dot.png"
         ,"img/simpleparticle.png"];
+
     this.init = function(){
         // preparing particle sets
         this.system = ParticleSystem.createParticleSystem(world.game.rootScene,
             world.game.assets["img/red1dot.png"],
             32, 32, m_PartCount);
     };
+
     this.system = null;
+
     this.blood = function(vec)
     {
         for (var i=0; i < m_PartCount / 5; i++)
@@ -21,6 +25,7 @@ function Particle(){
                 0.2 + Math.random() * 0.8, moveX, moveY, lifeSpan);
         }
     };
+
     // particle count
     var m_PartCount = 50;
 };
