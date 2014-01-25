@@ -89,6 +89,11 @@ var world = (function(){
                 [0,1,0,0],
                 [0,5,0,0]
             ]);
+
+            // temp adding of animals here
+            var a1 = new Animal(64, 64, "atlas", new Vec2(120, 120), 60, 320);
+            a1.speed = new Vec2(1, 1);
+
             for (var i = 0; i < world.toCallLaterStack.length; i ++){
                 world.toCallLaterStack[i].toBeCalledLater();
             }
