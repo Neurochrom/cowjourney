@@ -74,10 +74,13 @@ var world = (function(){
             }
         }
     };
-    this.par;
+    this.par = null;
+    this.music = null;
     this.start = function(){
         this.par = new Particle();
+        this.music = new Music();
         this.game.preload(this.par.preload);
+        this.game.preload(this.music.preload);
         this.game.preload("img/cow_atlas.png");
         this.game.preload("img/grass2.png");
         this.game.preload("img/trees_1.png");
@@ -97,6 +100,7 @@ var world = (function(){
             });
             background.addEventListener("enterframe", function(){
                 ParticleSystem.update();
+                music.update();
                 var sensing = world.smell();
             });
             background.width = world.size.x;
@@ -113,6 +117,7 @@ var world = (function(){
                     [0,1,0,0,1,0,0]
                 ]);
             world.par.init();
+            world.music.init();
 
         };
         this.game.start();
