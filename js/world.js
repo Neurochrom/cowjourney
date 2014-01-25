@@ -62,11 +62,14 @@ var world = (function(){
                         path = 'trees_4.png'
                         break;
                 }
-                var sprite = new Sprite(field_size.x, field_size.y);
-                sprite.image = world.game.assets['img/' + path];
-                sprite.width = field_size.x;
-                sprite.height = field_size.y;
-                sprite.pos = field_size.mulV(new Vec2(j,i));
+                var padding = 0.02;
+                var img = world.game.assets['img/' + path];
+                var sprite = new Sprite(img.width, img.height);
+                sprite.image = img;
+                var paddedField = field_size.mulS(1 + padding * 2);
+               sprite.scale(paddedField.x / img.width, paddedField.y / img.height);
+
+                sprite.pos = field_size.mulV(new Vec2(j * (1 - padding),i * (1 - padding)));
                 this.game.rootScene.addChild(sprite);
 
             }
