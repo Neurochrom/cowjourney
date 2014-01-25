@@ -105,7 +105,7 @@ var world = (function(){
     }
 
     this.preloadStash = [];
-    this.registerPreloadStash = function(item){
+    this.registerPreload = function(item){
         this.preloadStash.push(item);
     }
 
