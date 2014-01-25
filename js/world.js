@@ -46,7 +46,7 @@ var world = (function(){
         this.scene.addChild(animal);
     };
     this.addAnimalsAss = function(ass){
-        this.game.rootScene.addChild(ass);
+        this.scene.addChild(ass);
     };
 
     this.isObstacleAt = function(pos){
