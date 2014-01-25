@@ -65,9 +65,16 @@ var Animal = Class.create(Sprite, {
     followedObject : null,
     stunned : 0,    // for this many frames the animal will not follow anyone
     type : "cow",
-
+    groupie: null,
     smell: function(a) {
-        this.followedObject = a;
+        if(this.followedObject) {
+        }
+        else {
+            this.followedObject = a;
+            while(this.followedObject.groupie)
+                this.followedObject = this.followedObject.groupie;
+            this.followedObject.groupie = this;
+        }
     }
 
 });
@@ -93,6 +100,7 @@ world.smell = function() {
 
 world.findCollidingPairs = function() {
     // O(n^2) - slow as shit quick solution
+    var colliding = [];
     for(var i=0; i<world.animals.length; ++i) {
         var a1 = world.animals[i];
         for (var j=0; j<world.animals.length; ++j) {
@@ -101,7 +109,6 @@ world.findCollidingPairs = function() {
             var a2 = world.animals[j];
             var to = a2.center().subV(a1.center());
             var rSum = a1.rCol + a2.rCol;
-            var colliding = [];
             if (to.lengthSqr() < rSum*rSum) {
                 colliding.push([a1, a2]);
             }
@@ -121,12 +128,14 @@ world.resolveCollisions = function(colliding) {
 
 var pseudoPhysicalCol = function(a1, a2) {
     if(a1.type != "player_cow") {
-        a1.followedObject = null;
-        a1.stunned = 60;
+        //a1.followedObject = null;
+        if(a1.followedObject.type == "player_cow")
+            a1.stunned = 60;
     }
     if(a2.type != "player_cow") {
-        a2.followedObject = null;
-        a2.stunned = 60;
+        //a2.followedObject = null;
+        if(a1.followedObject.type == "player_cow")
+            a2.stunned = 60;
     }
 
     var to = a1.center().subV(a2.center());

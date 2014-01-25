@@ -172,7 +172,8 @@ var world = (function(){
             var a1 = new Player(64, 64, world.game.assets["img/cow_atlas.png"], new Vec2(30, 30), 30, 120);
             a1.type = "player_cow";
             var a2 = new Animal(64, 64, world.game.assets["img/cow_atlas.png"], new Vec2(30, 230), 30, 120);
-            //var a3 = new Animal(64, 64, world.game.assets["img/cow_atlas.png"], new Vec2(40, 410), 30, 120);
+            var a3 = new Animal(64, 64, world.game.assets["img/cow_atlas.png"], new Vec2(40, 410), 30, 120);
+            var a4 = new Animal(64, 64, world.game.assets["img/cow_atlas.png"], new Vec2(240, 410), 30, 120);
 
             world.readMap([
                     [0,0,0,0,0,0,0],
