@@ -60,7 +60,6 @@ var world = (function(){
                     case 5:
                         surface.context.fillStyle = "#098A8A";
                         break;
-
                 }
                 surface.context.fill();
                 var sprite = new Sprite(field_size.x, field_size.y);
@@ -70,18 +69,9 @@ var world = (function(){
             }
         }
     };
-    this.preloadStack = [];
-    this.pushPreload = function(str){
-        this.preloadStack.push(str);
-    };
-    this.toCallLaterStack = [];
-    this.callMeLater = function(el){
-        this.toCallLaterStack.push(el);
-    };
     this.start = function(){
-        for (var i = 0; i < this.preloadStack.length; i ++){
-            this.game.preload(this.preloadStack[i]);
-        }
+        var par = new Particle();
+        this.game.preload(par.preload);
         this.game.onload = function(){
             world.readMap([
                 [0,1,0,0],
@@ -89,6 +79,7 @@ var world = (function(){
                 [0,1,0,0],
                 [0,5,0,0]
             ]);
+            par.init();
 
             // temp adding of animals here
             var a1 = new Animal(64, 64, "atlas", new Vec2(120, 120), 60, 320);
