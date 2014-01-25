@@ -24,12 +24,18 @@ var Animal = Class.create(Sprite, {
                 this.speed = this.speed.mulS(0);
             }
             this.pos = this.pos.addV(this.speed);
-            //this.speed = this.speed.mulS(this.speed.lengthSqr() > this.rCol ? 0.91 : 0.9999995);
+            this.speed = this.speed.mulS(this.speed.lengthSqr() > this.rCol ? 0.6 : 0.90);
             if (this.followedObject) {
-                this.speed = this.followedObject.center().subV(this.pos.addV(new Vec2(this.width*0.5, this.height*0.5)));
-                this.speed.normalize();
+                if (this.stunned > 0)
+                   this.stunned--;
+                else {
+                var to = this.followedObject.center().subV(this.center());
+                to.normalize();
+                this.speed = this.speed.addV(to.mulS(0.12));
+                //this.speed.normalize();
+                }
             } else {
-                this.speed = this.speed.mulS(0);
+                //this.speed = this.speed.mulS(0);
             }
 
             this.frame = (this.age + Math.random()*4) % 40  < 4 ? 1 : 0;
@@ -41,6 +47,7 @@ var Animal = Class.create(Sprite, {
     rSense : 0,
     vel : "x",
     followedObject : null,
+    stunned : 0,    // for this many frames the animal will not follow anyone
     type : "cow",
     smell: function(a) {
         this.followedObject = a;
