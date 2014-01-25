@@ -242,8 +242,8 @@ var world = (function(){
             world.par.init();
             //world.music.init();
 
-            for(var i = 0; i < this.onStartStash.length; i++){
-                this.onStartStash[i].fun(this.onStartStash[i].par);
+            for(var i = 0; i < world.onStartStash.length; i++){
+                world.onStartStash[i].fun(world.onStartStash[i].par);
             }
         };
         this.game.start();
