@@ -31,10 +31,12 @@ var Animal = Class.create(Sprite, {
         });
         world.addAnimal(this);
     },
+    center: function() { return pos.addV(new Vec2(width*0.5, height*0.5)); },
     rCol : 0,
     rSense : 0,
     vel : "x",
-    followedObject : null
+    followedObject : null,
+    type : "cow"
 });
 
 
