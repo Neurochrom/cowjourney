@@ -31,12 +31,21 @@ var Animal = Class.create(Sprite, {
         });
         world.addAnimal(this);
     },
-    center: function() { return pos.addV(new Vec2(width*0.5, height*0.5)); },
+    center: function() { return this.pos.addV(new Vec2(this.width*0.5, this.height*0.5)); },
     rCol : 0,
     rSense : 0,
     vel : "x",
     followedObject : null,
-    type : "cow"
+    type : "cow",
+    smell: function(a) {
+        this.followedObject = a;
+    }
+});
+
+var Player = Class.create(Animal, {
+    smell : function(a) {
+        var xxx=2;
+    }
 });
 
 

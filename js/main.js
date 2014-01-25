@@ -19,16 +19,16 @@ window.onload = function(){
     world.smell = function() {
 
         // O(n^2) - slow as shit quick solution
-        for(var i=1; i<world.animals.length; ++i) {
-            var a1 = world.animals[i-1];
-            var a2 = world.animals[i];
-
-            var rsum = a1.rSense+a2.rSense;
-            var to = a2.center().subV(a2.center());
-
-            var smellyPairs = [];
-            if (rsum*rsum < to.lengthSqr()) {
-                smellyPairs.push([a1, a2]);
+        for(var i=0; i<world.animals.length; ++i) {
+            var a1 = world.animals[i];
+            for (var j=0; j<world.animals.length; ++j) {
+                if (j==i)
+                    continue;
+                var a2 = world.animals[j];
+                var to = a2.center().subV(a1.center());
+                if (to.lengthSqr() < a2.rSense*a2.rSense) {
+                    a2.smell(a1);
+                }
             }
         }
     }
