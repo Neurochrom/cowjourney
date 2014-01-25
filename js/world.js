@@ -99,6 +99,12 @@ var world = (function(){
 
     this.par = null;
     this.music = null;
+    this.onStartStash = [];
+    this.registerOnGameStart = function( item, param){
+        this.onStartStash.push({fun: item, par: param});
+    }
+
+
 
     this.smell = function() {
         // O(n^2) - slow as shit quick solution
@@ -184,7 +190,7 @@ var world = (function(){
 
             background.addEventListener("enterframe", function(){
                 ParticleSystem.update();
-                music.update();
+                // music.update();
                 world.smell();
                 world.resolveCollisions(world.findCollidingPairs());
             });
@@ -206,8 +212,11 @@ var world = (function(){
                     [0,1,0,0,1,0,0]
                 ]);
             world.par.init();
-            world.music.init();
+            //world.music.init();
 
+            for(var i = 0; i < this.onStartStash.length; i++){
+                this.onStartStash[i].fun(this.onStartStash[i].par);
+            }
         };
         this.game.start();
     }
