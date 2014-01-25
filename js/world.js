@@ -44,23 +44,25 @@ var world = (function(){
         for(var i = 0; i < map.length; i++){
             this.obstacles[i] = [];
             for(var j = 0; j < map[i].length; j++){
-                var surface = new Surface(field_size.x, field_size.y);
-                surface.context.beginPath();
-                surface.context.rect(0,0,field_size.x, field_size.y);
+                var color;
                 switch(map[i][j]){
                     case 0:
-                        surface.context.fillStyle = "#F3A312";
+                        continue;
                         break;
                     case 1:
-                        surface.context.fillStyle = "#AE3132";
+                        color = "#AE3132";
                         break;
                     case 2:
-                        surface.context.fillStyle = "#1276FE";
+                        color = "#1276FE";
                         break;
                     case 5:
-                        surface.context.fillStyle = "#098A8A";
+                        color = "#098A8A";
                         break;
                 }
+                var surface = new Surface(field_size.x, field_size.y);
+                surface.context.beginPath();
+                surface.context.fillStyle = color;
+                surface.context.rect(0,0,field_size.x, field_size.y);
                 surface.context.fill();
                 var sprite = new Sprite(field_size.x, field_size.y);
                 sprite.image = surface;
@@ -74,14 +76,8 @@ var world = (function(){
     this.start = function(){
         this.par = new Particle();
         this.game.preload(this.par.preload);
-        this.game.onload = function(){
-            world.readMap([
-                [0,1,0,0],
-                [0,2,0,1],
-                [0,1,0,0],
-                [0,5,0,0]
-            ]);
 
+        world.game.onload = function(){
             // temp adding of animals here
             var a1 = new Animal(64, 64, "img/cow_atlas.png", new Vec2(120, 120), 60, 320);
             a1.speed = new Vec2(1, 1);
@@ -98,6 +94,13 @@ var world = (function(){
             background.width = world.size.x;
             background.height = world.size.y;
             world.game.rootScene.addChild(background);
+
+                world.readMap([
+                    [0,1,0,0],
+                    [0,0,0,1],
+                    [0,1,0,2],
+                    [0,5,0,0]
+                ]);
             world.par.init();
 
         };
