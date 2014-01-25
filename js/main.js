@@ -16,10 +16,6 @@ window.onload = function(){
 
     world.init(game);
 
-    // temp adding of animals here
-    var a1 = new Animal(64, 64, "atlas", new Vec2(120, 120), 60, 320);
-    a1.speed = new Vec2(1, 1);
-
     var par = Particle();
     world.start();
  }

@@ -80,15 +80,34 @@ var world = (function(){
                 [0,1,0,0],
                 [0,5,0,0]
             ]);
-            par.init();
+            //par.init();
 
-            // temp adding of animals here
-            var a1 = new Animal(64, 64, "atlas", new Vec2(120, 120), 60, 320);
+            // Add animals here
+            var a1 = new Animal(64, 64, "img/cow_atlas.png", new Vec2(120, 120), 60, 320);
             a1.speed = new Vec2(1, 1);
 
-            for (var i = 0; i < world.toCallLaterStack.length; i ++){
-                world.toCallLaterStack[i].toBeCalledLater();
-            }
+            // A background for touch event handling
+            var background = new Entity();
+            background.touchstart = function (e) {
+                console.log("touchstart " + e.x);
+                a1.followedObject = { center: function() { return new Vec2(e.x, e.y); } };
+            };
+            background.touchend = function (e) {
+                console.log("touchend " + e.x);
+            };
+            background.touchmove = function (e) {
+                console.log("touchmove " + e.x);
+            };
+            background.width = world.size.x;
+            background.height = world.size.y;
+            background.addEventListener('touchstart', background.touchstart);
+            background.addEventListener('touchend', background.touchend);
+            background.addEventListener('touchmove', background.touchmove);
+            world.game.rootScene.addChild(background);
+
+            //for (var i = 0; i < world.toCallLaterStack.length; i ++){
+            //    world.toCallLaterStack[i].toBeCalledLater();
+            //}
         };
         this.game.start();
     }
