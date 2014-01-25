@@ -1,6 +1,8 @@
 world.load_level = function(lvl_n) {
 	world.scene = new Scene();
 	world.game.replaceScene(world.scene);
+    world.animals = [];
+    world.obstacles = {};
 
 	var background = new Sprite(world.size.x, world.size.y);
 
