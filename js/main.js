@@ -20,4 +20,3 @@ window.onload = function(){
     var par = Particle();
     world.start();
  }
- 

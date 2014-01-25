@@ -11,8 +11,10 @@ function getWidth(){
 
     return xWidth;
 }
+
 function getHeight(){
     var xHeight = null;
+
     if(window.screen != null)
         xHeight = window.screen.availHeight;
 
@@ -24,7 +26,6 @@ function getHeight(){
 
     return xHeight;
 }
-
 
 var world = (function(){
 
@@ -47,6 +48,7 @@ var world = (function(){
         var p = pos.divV(this.field_size);
         if(this.obstacles[Math.floor(p.y)] && this.obstacles[Math.floor(p.y)][Math.floor(p.x)])
                 return true;
+
         return false;
     };
 
@@ -55,14 +57,16 @@ var world = (function(){
     this.readMap = function(map){
         var maps_size = new Vec2(map[0].length, map.length);
         this.field_size = this.size.divV(maps_size);
+
         for(var i = 0; i < map.length; i++){
             this.obstacles[i] = {};
+
             for(var j = 0; j < map[i].length; j++){
+
                 var path;
                 switch(map[i][j]){
                     case 0:
                         continue;
-                        break;
                     case 1:
                         path = 'trees_1.png'
                         break;
@@ -76,17 +80,18 @@ var world = (function(){
                         path = 'trees_4.png'
                         break;
                 }
-                var padding = 0.02;
+
                 var img = world.game.assets['img/' + path];
                 var sprite = new Sprite(img.width, img.height);
                 sprite.image = img;
+                
+                var padding = 0.02;
                 var paddedField = this.field_size.mulS(1 + padding * 2);
+
                 sprite.scale(paddedField.x / img.width, paddedField.y / img.height);
-
                 sprite.pos = this.field_size.mulV(new Vec2(j * (1 - padding),i * (1 - padding)));
+
                 this.obstacles[i][j] = sprite;
-
-
                 this.game.rootScene.addChild(sprite);
             }
         }
@@ -98,11 +103,14 @@ var world = (function(){
     this.smell = function() {
         // O(n^2) - slow as shit quick solution
         for(var i=0; i<this.animals.length; ++i) {
+
             var a1 = this.animals[i];
             for (var j=0; j<this.animals.length; ++j) {
                 if (j==i)
                     continue;
+
                 var a2 = this.animals[j];
+
                 var to = a2.center().subV(a1.center());
                 if (to.lengthSqr() < a2.rSense*a2.rSense) {
                     a2.smell(a1);
@@ -114,10 +122,12 @@ var world = (function(){
     this.findCollidingPairs = function() {
         // O(n^2) - slow as shit quick solution
         for(var i=0; i<this.animals.length; ++i) {
+
             var a1 = this.animals[i];
             for (var j=0; j<this.animals.length; ++j) {
                 if (j==i)
                     continue;
+
                 var a2 = this.animals[j];
                 var to = a2.center().subV(a1.center());
                 var rSum = a1.rCol + a2.rCol;
@@ -143,7 +153,7 @@ var world = (function(){
     };
 
     this.start = function(){
-        this.par = new Particle();
+        this.par   = new Particle();
         this.music = new Music();
         this.game.preload(this.par.preload);
         this.game.preload(this.music.preload);
@@ -164,17 +174,22 @@ var world = (function(){
                 world.par.blood(new Vec2(e.x-12, e.y-12));
                 a1.followedObject = { center: function() { return new Vec2(e.x, e.y); } };
             });
+
             background.addEventListener("enterframe", function(){
                 ParticleSystem.update();
                 music.update();
                 world.smell();
                 world.resolveCollisions(world.findCollidingPairs());
             });
+
             background.width = world.size.x;
             background.height = world.size.y;
+
             world.game.rootScene.addChild(background);
+
             var a1 = new Player(64, 64, world.game.assets["img/cow_atlas.png"], new Vec2(30, 30), 30, 320);
             a1.type = "player_cow";
+
             var a2 = new Animal(64, 64, world.game.assets["img/cow_atlas.png"], new Vec2(30, 130), 30, 320);
 
             world.readMap([
