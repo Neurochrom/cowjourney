@@ -3,6 +3,7 @@ var Beaver = Class.create(Animal, {
         Animal.call(this, 64, 64,
             world.game.assets["img/beaver_animation.png"],
             world.game.assets["img/beaver_ass.png"],
+            9,
             pos, 30, 120);
     },
 

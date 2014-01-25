@@ -4,6 +4,7 @@ var Cow = Class.create(Animal, {
         Animal.call(this, 64, 64,
             world.game.assets["img/cow_animation.png"],
             world.game.assets["img/cow_ass.png"],
+            18,
             pos, 30, 120);
     },
 

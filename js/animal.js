@@ -1,8 +1,6 @@
-var headLevel = 18;
-
 var Animal = Class.create(Sprite, {
 
-    initialize : function(width, height, image, assImage, pos, rCol, rSense) {
+    initialize : function(width, height, image, assImage, headOff, pos, rCol, rSense) {
         //alert( " Animal");
         Sprite.call(this, width, height);
 
@@ -19,7 +17,7 @@ var Animal = Class.create(Sprite, {
 
         this.ass = new Sprite(width, height);
         this.ass.image = assImage;
-        this.ass.pos = this.pos.addV(new Vec2(0,headLevel));
+        this.ass.pos = this.pos.addV(new Vec2(0,headOff));
         world.addAnimalsAss(this.ass);
         world.addAnimal(this);
 
@@ -58,7 +56,8 @@ var Animal = Class.create(Sprite, {
 
             this.frame += (this.age % 5 == 0) ? 1 : 0;
             if(this.frame > 10) this.frame = 0;
-            this.ass.pos = this.pos.subV(this.speed.mulV(this.speed.mulV(this.speed))).addV(new Vec2(0,headLevel));
+            this.ass.pos = this.pos.subV(this.speed.mulV(this.speed.mulV(this.speed)))
+                               .addV(new Vec2(0,headOff));
             this.rotate((Math.sin(this.age/this.rotationDiv - this.rotationDiv / 2)*this.rotationMul));
             var tmp = this.speed.length();
             this.ass.rotate(0.2 * Math.sin(tmp * this.age * 10));
