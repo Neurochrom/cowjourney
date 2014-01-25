@@ -1,6 +1,8 @@
 var Player = Class.create(Cow, {
     initialize : function(pos) {
-        Cow.call(pos);
+        //alert( " Player");
+        Cow.call(this, pos);
+    },
 
     smell : function(a) {
         var xxx=2;

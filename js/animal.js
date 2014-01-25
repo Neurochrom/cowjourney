@@ -3,6 +3,7 @@ var headLevel = 18;
 var Animal = Class.create(Sprite, {
 
     initialize : function(width, height, image, pos, rCol, rSense) {
+        //alert( " Animal");
         Sprite.call(this, width, height);
 
         this.rCol = rCol;
@@ -155,5 +156,7 @@ var pseudoPhysicalCol = function(a1, a2) {
     a1.speed = a1.speed.subV(j.divS(m1*1.3));
     a2.speed = a2.speed.addV(j.divS(m2*1.3));
 };
+
+
 
 

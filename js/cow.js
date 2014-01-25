@@ -1,7 +1,7 @@
 
 var Cow = Class.create(Animal, {
     initialize : function(pos) {
-        Animal.call(64, 64, "img/cow_atlas", pos, 30, 120);
+        Animal.call(this, 64, 64, world.game.assets["img/cow_animation.png"], pos, 30, 120);
     },
 
     smell: function(a) {
@@ -14,4 +14,4 @@ var Cow = Class.create(Animal, {
             this.followedObject.groupie = this;
         }
     }
-}
+});

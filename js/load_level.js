@@ -36,15 +36,20 @@ world.load_level = function(lvl_n) {
 
             world.scene.addChild(background);
 
-            /*
+            //*
             var a1 = new Player(new Vec2(30, 30));
             a1.type = "player_cow";
             var a2 = new Cow(new Vec2(30, 230));
             var a3 = new Cow(new Vec2(40, 410));
             var a4 = new Cow(new Vec2(240, 410));
+            /*/
+            var a1 = new Player(64, 64, world.game.assets["img/cow_animation.png"], new Vec2(30, 30), 30, 120);
+            a1.type = "player_cow";
+            var a2 = new Animal(64, 64, world.game.assets["img/cow_animation.png"], new Vec2(30, 230), 30, 120);
+            var a3 = new Animal(64, 64, world.game.assets["img/cow_animation.png"], new Vec2(40, 410), 30, 120);
+            var a4 = new Animal(64, 64, world.game.assets["img/cow_animation.png"], new Vec2(240, 410), 30, 120);
             */
-
-			world.readMap([
+ world.readMap([
 				[0,0,0,0,0,0,0],
 				[0,3,4,4,2,0,0],
 				[0,0,0,0,0,0,1],
