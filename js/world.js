@@ -132,7 +132,6 @@ var world = (function(){
 
         this.game.preload(this.par.preload);
         this.game.preload(this.music.preload);
-        this.game.preload("img/cow_atlas.png");
         this.game.preload("img/grass2.png");
         this.game.preload("img/trees_1.png");
         this.game.preload("img/trees_2.png");
