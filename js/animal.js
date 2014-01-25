@@ -23,16 +23,16 @@ var Animal = Class.create(Sprite, {
                 var to_be = this.center().addV(this.speed);
                 var to_be = this.center();
                 if(world.isObstacleAt(to_be.addV(new Vec2(this.rCol,0)))){
-                    this.speed.x = 0;
+                    if (this.speed.x>0) this.speed.x = 0;
                 }
                 if(world.isObstacleAt(to_be.addV(new Vec2(0,this.rCol)))){
-                    this.speed.y = 0;
+                    if (this.speed.y>0) this.speed.y = 0;
                 }
                 if(world.isObstacleAt(to_be.subV(new Vec2(this.rCol,0)))){
-                    this.speed.x = 0;
+                    if (this.speed.x<0) this.speed.x = 0;
                 }
                 if(world.isObstacleAt(to_be.subV(new Vec2(0,this.rCol)))){
-                    this.speed.y = 0;
+                    if (this.speed.y<0) this.speed.y = 0;
                 }
             }
             this.pos = this.pos.addV(this.speed);
