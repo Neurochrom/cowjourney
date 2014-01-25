@@ -8,7 +8,8 @@ window.onload = function() {
         game.rootScene.backgroundColor = 'black';
         var particleCount = 100;
 
-        var particleSystem = ParticleSystem.createParticleSystem(this.rootScene, this.assets['images/particle.png'], 128, 128, particleCount, 50);
+        var particleSystem = ParticleSystem.createParticleSystem(this.rootScene,
+            this.assets['img/particle.png'], 128, 128, particleCount, 50);
 
         function initParticle() {
             var particleX = (320-128)/2;
