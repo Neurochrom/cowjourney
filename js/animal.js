@@ -1,12 +1,16 @@
 var Animal = Class.create(Sprite, {
 
-    initialize : function(width, height, image, assImage, headOff, pos, rCol, rSense) {
+    initialize : function(width, height, type, headOff, pos, rCol, rSense) {
         //alert( " Animal");
         Sprite.call(this, width, height);
+
+        this.type = type;
 
         this.rCol = rCol;
         this.rSense = rSense;
         this.speed = new Vec2(0, 0);
+
+        var image = world.game.assets["img/"+type+"_animation.png"];
 
         this.image = image;
         this.frame = 0;
@@ -15,12 +19,12 @@ var Animal = Class.create(Sprite, {
         this.rotationDiv = Math.random() * 10 + 15;
         this.rotationMul = Math.random() * 0.2 + 0.2;
 
+        var assImage = world.game.assets["img/"+type+"_ass.png"];
         this.ass = new Sprite(width, height);
         this.ass.image = assImage;
         this.ass.pos = this.pos.addV(new Vec2(0,headOff));
         world.addAnimalsAss(this.ass);
         world.addAnimal(this);
-
 
         this.addEventListener("enterframe", function(){
             if(this.followedObject){
@@ -75,7 +79,8 @@ var Animal = Class.create(Sprite, {
     vel : "x",
     followedObject : null,
     stunned : 0,    // for this many frames the animal will not follow anyone
-    type : "cow",
+    type : "",
+    isPlayer: 0,
     groupie: null,
     smell: function(a) {
     }
@@ -129,9 +134,9 @@ world.resolveCollisions = function(colliding) {
 };
 
 var stun = function(a1) {
-    if(a1.type != "player_cow") {
+    if(a1.isPlayer) {
         //a1.followedObject = null;
-        if(a1.followedObject.type == "player_cow")
+        if(a1.followedObject.isPlayer)
             a1.stunned = 60;
         else
             a1.stunned = 10;
