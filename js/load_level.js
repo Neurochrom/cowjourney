@@ -29,9 +29,14 @@ world.load_level = function(lvl_n) {
 	background.width = world.size.x;
 	background.height = world.size.y;
 
+    // Animal short cuts
+    var C = 30;
+    var P = 20;
+    var W = 40;
+
 	switch(lvl_n)
 	{
-		case 1:
+		case 2:
 			background.image = world.game.assets["img/grass2.png"];
 
             world.scene.addChild(background);
@@ -40,9 +45,9 @@ world.load_level = function(lvl_n) {
             a1.type = "player_cow";
             var a2 = new Cow(new Vec2(30, 230));
             var a3 = new Cow(new Vec2(40, 410));
-            var a4 = new Beaver(new Vec2(240, 410));
+            var a4 = new Cow(new Vec2(240, 410));
 
- world.readMap([
+            world.readMap([
 				[0,0,0,0,0,0,0],
 				[0,3,4,4,2,0,0],
 				[0,0,0,0,0,0,1],
@@ -52,7 +57,23 @@ world.load_level = function(lvl_n) {
 
 			break;
 
-		case 2:
+		case 1:
+            background.image = world.game.assets["img/grass2.png"];
+
+            world.scene.addChild(background);
+
+            world.readMap([
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,0,P,1,0,0,0,1,0,0,0,0,0,1],
+            [1,0,0,1,0,C,0,1,0,0,0,0,C,1],
+            [1,0,0,1,0,1,1,1,0,0,1,0,0,1],
+            [1,0,0,1,0,0,0,0,0,0,1,0,0,1],
+            [1,0,0,1,0,0,0,0,0,0,1,0,0,1],
+            [1,0,0,1,1,1,1,1,1,1,1,0,0,1],
+            [1,0,C,0,0,0,0,0,0,C,0,0,0,1],
+            [1,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+        ]);
 
 			break;
 	}

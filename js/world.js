@@ -68,7 +68,7 @@ var world = (function(){
 
             for(var j = 0; j < map[i].length; j++){
 
-                var path;
+                var path = null;
                 switch(map[i][j]){
                     case 0:
                         continue;
@@ -84,6 +84,17 @@ var world = (function(){
                     case 4:
                         path = 'trees_4.png'
                         break;
+                    case 20:
+                        var a1 = new Player(this.field_size.mulV(new Vec2(j, i)));
+                        a1.type = "player_cow";
+                        //new Player(new Vec2(i, j).mulV(this.field_size));
+                        continue;
+                    case 30:
+                        new Cow(this.field_size.mulV(new Vec2(j, i)));
+                        continue;
+                    case 40:
+                        //new Wombat(this.field_size.mulV(new Vec2(j, i)));
+                        continue;
                 }
 
                 var img = world.game.assets['img/' + path];
