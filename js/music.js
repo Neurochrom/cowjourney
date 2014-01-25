@@ -1,4 +1,4 @@
-// To add more sounds, add new item here and this.preload
+// To add more sounds, add new item here and this.preload and in this.play
 var g_SoundEffect = {Bgm : 0, Cow : 1, Blood : 2, DogYelp : 3, Bark : 4};
 
 function Music(){
@@ -11,6 +11,8 @@ function Music(){
      */
     this.preload = [//"res/bgm.mp3",
                     "res/cow.mp3",
+                    "res/cow1.mp3",
+                    "res/cow2.mp3",
                     "res/bloody.mp3",
                     "res/dogyelp.mp3",
                     "res/bark.mp3"];
@@ -28,7 +30,27 @@ function Music(){
     };
     this.play = function (p_soundid)
     {
-        world.game.assets[this.preload[p_soundid]].clone().play();
+        switch(p_soundid)
+        {
+            case g_SoundEffect.Bgm:
+                world.game.assets["res/bgm.mp3"].clone().play();
+                break;
+            case g_SoundEffect.Cow:
+                var cows = ["res/cow.mp3",
+                            "res/cow1.mp3",
+                            "res/cow2.mp3"];
+                world.game.assets[cows[Math.floor(Math.random()*2.999)]].clone().play();
+                break;
+            case g_SoundEffect.Blood:
+                world.game.assets["res/bloody.mp3"].clone().play();
+                break;
+            case g_SoundEffect.DogYelp:
+                world.game.assets["res/dogyelp.mp3"].clone().play();
+                break;
+            case g_SoundEffect.Bark:
+                world.game.assets["res/bark.mp3"].clone().play();
+                break;
+        }
     };
 
     var m_BGM = null;
