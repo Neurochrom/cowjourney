@@ -1,5 +1,5 @@
 function getWidth(){
-    xWidth = null;
+    var xWidth = null;
     if(window.screen != null)
         xWidth = window.screen.availWidth;
 
@@ -12,7 +12,7 @@ function getWidth(){
     return xWidth;
 }
 function getHeight(){
-    xHeight = null;
+    var xHeight = null;
     if(window.screen != null)
         xHeight = window.screen.availHeight;
 
@@ -38,16 +38,19 @@ var world = (function(){
         this.game.rootScene.addChild(animal);
     };
     this.readMap = function(map){
+        var maps_size = new Vec2(map.length, map[0].length);
+        var field_size = this.size.divV(maps_size);
+        for(var i = 0; i < map.length; i++){
+            for(var j = 0; j < map[i].length; j++){
 
-        for(var x = 0; x < map.length; x ++){
-            for(var y = 0; y < map[x].length; y++){
-                var surface = new Surface(2*r, 2*r);
+                var surface = new Surface(field_size.x, field_size.y);
                 surface.context.beginPath();
-                surface.context.fillRect(0,1,2,3)
+                surface.context.fillRect(0,1,2,3);
                 surface.context.fillStyle = "#F3A312";
-                var sprite = new Sprite();
-                this.image = surface;
-
+                var sprite = new Sprite(field_size.x, field_size.y);
+                sprite.image = surface;
+                sprite.pos = field_size.mulV(new Vec2(i,j));
+                this.game.rootScene.addChild(sprite);
 
             }
 

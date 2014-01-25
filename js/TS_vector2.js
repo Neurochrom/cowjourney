@@ -15,6 +15,8 @@ function Vec2(x_,y_)
 	this.mulV = function(vec_)	{ 	return new Vec2(this.x * vec_.x, this.y * vec_.y);	};
 	/* vector / scalar */
 	this.divS = function(value)	{ 	return new Vec2(this.x/value,this.y/value); 		};
+    /* vector / scalar */
+    this.divV = function(vec_)	{ 	return new Vec2(this.x/ vec_.x,this.y/ vec_.y); 	};
 	/* vector + scalar */
 	this.addS = function(value)	{ 	return new Vec2(this.x+value,this.y+value); 		};
 	/* vector + vector */

@@ -10,13 +10,13 @@ Sprite.prototype.addToPosV = function(vec_) {
 };
 
 window.onload = function(){
-    var game = new Core(960, 640);
+    var game = new Core(world.size.x, world.size.y);
     game.fps = 60;
-    game.preload("img/background.png");
     // Particle graphic
     game.preload("img/simpleparticle.png");
 
     game.onload = function(){
+        world.init(game);
 
         var background = new Sprite(960,640);
         background.image = game.assets["img/background.png"];
@@ -48,9 +48,4 @@ window.onload = function(){
         }
         world.start();
     };
-
-    var testAnimal = new Animal(64, 64, "test", Vec2(120, 120), 32, 64);
-    testAnimal.speed = Vec2(-0.1,-0.1);
-
-    game.start();
 };
