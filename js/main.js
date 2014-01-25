@@ -12,7 +12,8 @@ Sprite.prototype.addToPosV = function(vec_) {
 window.onload = function(){
     var game = new Core(world.size.x, world.size.y);
     game.fps = 60;
-    // Particle graphic
+    game.preload("img/cow_atlas.png");
+
     world.init(game);
 
     var par = Particle();

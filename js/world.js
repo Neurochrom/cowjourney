@@ -78,6 +78,7 @@ var world = (function(){
     this.callMeLater = function(el){
         this.toCallLaterStack.push(el);
     };
+
     this.start = function(){
         for (var i = 0; i < this.preloadStack.length; i ++){
             this.game.preload(this.preloadStack[i]);
@@ -94,8 +95,9 @@ var world = (function(){
                 world.toCallLaterStack[i].toBeCalledLater();
             }
 
+
             // Add animals here
-            var a1 = new Animal(64, 64, "atlas", new Vec2(120, 120), 60, 320);
+            var a1 = new Animal(64, 64, "img/cow_atlas.png", new Vec2(120, 120), 60, 320);
             a1.speed = new Vec2(1, 1);
 
             // A background for touch event handling

@@ -5,25 +5,29 @@ var Animal = Class.create(Sprite, {
         this.rCol = rCol;
         this.rSense = rSense;
         this.speed = new Vec2(0, 0);
-
+        /*
         var surface = new Surface(width, height);
         surface.context.beginPath();
         surface.context.arc(rCol, rCol, rCol, 0, Math.PI * 2);
         surface.context.fillStyle = "#FF1133";
         surface.context.fill();
         this.image = surface;
-
+        */
+        this.image = world.game.assets[atlasName];
+        this.frame = 0;
         this.pos = pos;
 
         this.addEventListener("enterframe", function(){
             this.pos = this.pos.addV(this.speed);
             //this.speed = this.speed.mulS(this.speed.lengthSqr() > this.rCol ? 0.91 : 0.9999995);
             if (this.followedObject) {
-                this.speed = this.followedObject.center().subV(this.pos);
+                this.speed = this.followedObject.center().subV(this.pos.addV(new Vec2(this.width*0.5, this.height*0.5)));
                 this.speed.normalize();
             } else {
                 this.speed = this.speed.mulS(0);
             }
+
+            this.frame = (this.age + Math.random()*4) % 40  < 4 ? 1 : 0;
         });
         world.addAnimal(this);
     },
