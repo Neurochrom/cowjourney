@@ -100,7 +100,7 @@ var world = (function(){
     this.par = null;
     this.music = null;
     this.onStartStash = [];
-    this.registerOnGameStart = function( item, param){
+    this.registerOnGameStart = function(param, item){
         this.onStartStash.push({fun: item, par: param});
     }
 
