@@ -2,7 +2,7 @@ var headLevel = 18;
 
 var Animal = Class.create(Sprite, {
 
-    initialize : function(width, height, image, pos, rCol, rSense) {
+    initialize : function(width, height, image, assImage, pos, rCol, rSense) {
         //alert( " Animal");
         Sprite.call(this, width, height);
 
@@ -18,7 +18,7 @@ var Animal = Class.create(Sprite, {
         this.rotationMul = Math.random() * 0.2 + 0.2;
 
         this.ass = new Sprite(width, height);
-        this.ass.image = world.game.assets["img/cow_ass.png"];
+        this.ass.image = assImage;
         this.ass.pos = this.pos.addV(new Vec2(0,headLevel));
         world.addAnimalsAss(this.ass);
         world.addAnimal(this);

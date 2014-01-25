@@ -1,6 +1,9 @@
 var Beaver = Class.create(Animal, {
     initialize : function(pos) {
-        Animal.call(this, 64, 64, world.game.assets["img/beaver_animation.png"], pos, 30, 120);
+        Animal.call(this, 64, 64,
+            world.game.assets["img/beaver_animation.png"],
+            world.game.assets["img/beaver_ass.png"],
+            pos, 30, 120);
     },
 
     smell: function(a) {
