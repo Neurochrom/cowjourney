@@ -20,11 +20,11 @@ function Particle(){
     {
         for (var i=0; i < m_PartCount / 5; i++)
         {
-            var moveX = (Math.random() - 0.5);
-            var moveY = (Math.random() - 0.5);
+            var moveX = (Math.random() - 0.5) * 3;
+            var moveY = (Math.random() - 0.5) * 3;
             var lifeSpan = Math.random()*20 + 30;
-            this.bloodSys.addParticle(vec.x, vec.y, 0.5 + Math.random() * 0.5,
-                0.2 + Math.random() * 0.8, moveX, moveY, lifeSpan);
+            this.bloodSys.addParticle(vec.x, vec.y, 0.2 + Math.random() * 0.5,
+                0.2 + Math.random() * 0.3, moveX, moveY, lifeSpan);
         }
     };
 
