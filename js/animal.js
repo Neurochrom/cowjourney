@@ -31,6 +31,7 @@ var Animal = Class.create(Sprite, {
 
         this.addEventListener("enterframe", function(){
             if(this.bleed) {
+                if(this.age % 30 == 5)
                 world.par.blood(this.pos);
             }
 
