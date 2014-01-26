@@ -128,11 +128,11 @@ var world = (function(){
                     case 14:  path = 'wood_cd.png' ;    break;
                     case 15:  path = 'wood_cr.png' ;    break;
                     case 16:  path = 'wood_c.png'  ;    break;
-                    case 17:  new House  (field_position, newscale); continue;
-                    case 20:  new Player (field_position, newscale); continue;
-                    case 30:  new Cow    (field_position, newscale); continue;
-                    case 40:  new Beaver (field_position, newscale); continue;
-                    case 50:  new NKBeaver(field_position, newscale); continue;
+                    case 17:  new House    (field_position, newscale); continue;
+                    case 20:  new Player   (field_position, newscale); continue;
+                    case 30:  new Cow      (field_position, newscale); continue;
+                    case 40:  new Beaver   (field_position, newscale); continue;
+                    case 50:  new NKBeaver (field_position, newscale); continue;
                 }
 
                 var img = world.game.assets['img/' + path];
