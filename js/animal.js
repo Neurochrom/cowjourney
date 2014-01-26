@@ -7,8 +7,8 @@ var Animal = Class.create(Sprite, {
         this.id = animalId++;
         this.type = type;
 
-        this.rCol = rCol;
-        this.rSense = rSense;
+        this.rCol = rCol * scale.x; // hope it will work
+        this.rSense = rSense * scale.x; // hope it will work
         this.speed = new Vec2(0, 0);
 
         var image = world.game.assets["img/"+type+"_animation.png"];
