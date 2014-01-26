@@ -9,7 +9,7 @@ function Music(){
      * dogyelp.mp3 : http://www.freesound.org/people/Tails1942/sounds/163280/
      * bark.mp3 : http://www.freesound.org/people/soundscalpel.com/sounds/110389/
      */
-    this.preload = [//"res/bgm.mp3",
+    this.preload = ["res/bgm.mp3",
                     "res/cow.mp3",
                     "res/cow1.mp3",
                     "res/cow2.mp3",

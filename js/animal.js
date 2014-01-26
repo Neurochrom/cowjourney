@@ -13,6 +13,7 @@ var Animal = Class.create(Sprite, {
 
         var image = world.game.assets["img/"+type+"_animation.png"];
 
+        this.scaleV = scale;
         this.image = image;
         this.frame = 0;
         this.pos = pos;
@@ -31,26 +32,29 @@ var Animal = Class.create(Sprite, {
 
         this.addEventListener("enterframe", function(){
             if(this.bleed) {
+                if(this.age % 22 == 5)
                 world.par.blood(this.pos);
+                if(this.age % 50)
+                    world.music.play(g_SoundEffect.Blood);
             }
 
             if(this.followedObject){
-                var to_be = this.center().addV(this.speed);
+                var to_be = this.center();
 
-                if(world.isObstacleAt(to_be.addV(new Vec2(this.rCol,0)))){
+                if(world.isObstacleAt(to_be.addV(new Vec2(this.rCol * this.scaleV.x,0)))){
                     if (this.speed.x>0) this.speed.x = 0;
                 }
-                if(world.isObstacleAt(to_be.addV(new Vec2(0,this.rCol)))){
+                if(world.isObstacleAt(to_be.addV(new Vec2(0,this.rCol * this.scaleV.y)))){
                     if (this.speed.y>0) this.speed.y = 0;
                 }
-                if(world.isObstacleAt(to_be.subV(new Vec2(this.rCol,0)))){
+                if(world.isObstacleAt(to_be.subV(new Vec2(this.rCol * this.scaleV.x,0)))){
                     if (this.speed.x<0) this.speed.x = 0;
                 }
-                if(world.isObstacleAt(to_be.subV(new Vec2(0,this.rCol)))){
+                if(world.isObstacleAt(to_be.subV(new Vec2(0,this.rCol * this.scaleV.y)))){
                     if (this.speed.y<0) this.speed.y = 0;
                 }
             }
-            this.pos = this.pos.addV(this.speed);
+            this.pos = this.pos.addV(this.speed.mulV(this.scaleV));
             this.speed = this.speed.mulS(this.speed.lengthSqr() > this.rCol ? 0.6 : 0.96);
             if (this.followedObject) {
                 if (this.stunned > 0)
@@ -75,8 +79,8 @@ var Animal = Class.create(Sprite, {
 
             this.frame += (this.age % 5 == 0) ? 1 : 0;
             if(this.frame > 10) this.frame = 0;
-            this.ass.pos = this.pos.subV(this.speed.mulV(this.speed.mulV(this.speed)))
-                               .addV(new Vec2(0,this.headOff));
+            this.ass.pos = this.pos.subV(this.speed.mulV(this.speed.mulV(this.speed)).mulV(this.scaleV))
+                               .addV(new Vec2(0,this.headOff * this.scaleV.y));
             this.rotate((Math.sin(this.age/this.rotationDiv - this.rotationDiv / 2)*this.rotationMul));
             var tmp = this.speed.length();
             this.ass.rotate(0.2 * Math.sin(tmp * this.age * 10));
@@ -91,9 +95,10 @@ var Animal = Class.create(Sprite, {
         });
     },
     ass : null,
+    scaleV : new Vec2(1,1),
 
     center: function() {
-        return this.pos.addV(new Vec2(this.width*0.5, this.height*0.5));
+        return this.pos.addV(new Vec2(this.width*0.5, this.height*0.5).mulV(this.scaleV));
     },
 
     rCol : 0,
@@ -105,19 +110,27 @@ var Animal = Class.create(Sprite, {
     id : 0,
     isPlayer : 0,
     groupie : null,
+
     smell : function(a) {
     },
+
     onColidedWith : function(a) {
         stun(this);
     },
+
     bleed : 0,
     dead : 0,
+
     onDie : function() {
         this.dead = 1;
         this.bleed = 1;
         //world.par.slaughter(this.pos);
         this.headOff = -4;
+
+        if(this.isPlayer)
+            world.game.replaceScene(new GameOver());
     },
+
 
     attachAnimal : function(a) {
         this.followedObject = a;

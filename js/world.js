@@ -53,7 +53,6 @@ var world = (function(){
 
     this.isObstacleAt = function(pos){
         var p = pos.subV(this.diffScale).subV(this.padding).divV(this.field_size);
-
         if(this.obstacles[Math.floor(p.y)] && this.obstacles[Math.floor(p.y)][Math.floor(p.x)])
             return true;
         return false;
@@ -85,6 +84,32 @@ var world = (function(){
                     (newscale.y*h - h) / 2);
                 var field_position = this.field_size.mulV(new Vec2(j, i)).addV(this.diffScale).addV(this.padding);
                 switch(map[i][j]){
+                    case 0:   continue;
+                    case 17:  continue;
+                    case 20:  continue;
+                    case 30:  continue;
+                    case 40:  continue;
+                    case 50:   continue;
+                }
+                var img = world.game.assets['img/shadow.png'];
+                var shadow = new Sprite(img.width, img.height);
+                shadow.image = img;
+
+                shadow.scale(newscale.x, newscale.y);
+                shadow.pos = field_position.subV(new Vec2(field_size.x * 0.5,0));
+
+                this.scene.addChild(shadow);
+            }
+            for(var j = 0; j < map[i].length; j++){
+
+                var path = null;
+                var h = 64;
+                var w = 64;
+                var newscale = new Vec2(this.field_size.x/ w, this.field_size.y/ h);
+                this.diffScale = new Vec2((newscale.x*w - w) / 2,
+                    (newscale.y*h - h) / 2);
+                var field_position = this.field_size.mulV(new Vec2(j, i)).addV(this.diffScale).addV(this.padding);
+                switch(map[i][j]){
                     case 0:                          continue;
                     case 1:   path = 'camp.png'    ;    break;
                     case 2:   path = 'wood_l.png'  ;    break;
@@ -102,11 +127,11 @@ var world = (function(){
                     case 14:  path = 'wood_cd.png' ;    break;
                     case 15:  path = 'wood_cr.png' ;    break;
                     case 16:  path = 'wood_c.png'  ;    break;
-                    case 17:  new House  (field_position, newscale); continue;
-                    case 20:  new Player (field_position, newscale); continue;
-                    case 30:  new Cow    (field_position, newscale); continue;
-                    case 40:  new Beaver (field_position, newscale); continue;
-                    case 50:  new NKBeaver(field_position, newscale); continue;
+                    case 17:  new House    (field_position, newscale); continue;
+                    case 20:  new Player   (field_position, newscale); continue;
+                    case 30:  new Cow      (field_position, newscale); continue;
+                    case 40:  new Beaver   (field_position, newscale); continue;
+                    case 50:  new NKBeaver (field_position, newscale); continue;
                 }
 
                 var img = world.game.assets['img/' + path];
@@ -117,6 +142,7 @@ var world = (function(){
                 sprite.pos = field_position;
 
                 this.obstacles[i][j] = sprite;
+
                 this.scene.addChild(sprite);
             }
         }
@@ -177,6 +203,7 @@ var world = (function(){
         this.game.preload("img/cow_ass.png");
         this.game.preload("img/beaver_animation.png");
         this.game.preload("img/beaver_ass.png");
+        this.game.preload("img/shadow.png");
         this.game.preload("img/nkbeaver_animation.png");
         this.game.preload("img/nkbeaver_ass.png");
 
@@ -187,6 +214,11 @@ var world = (function(){
 
         world.next_level = function(){
             world.load_level(++world.current_level)
+
+            world.par.init();
+            for(var i = 0; i < world.onStartStash.length; i++){
+                world.onStartStash[i].fun(world.onStartStash[i].par);
+            }
         }
 
         world.loadnormalgame = function(){

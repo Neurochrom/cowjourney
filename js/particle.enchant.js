@@ -1,8 +1,9 @@
 var ParticleSystem = {
-    createParticleSystem: function(scene, image, width, height, maxParticle) {
+    createParticleSystem: function(scene, image, imaage_dust, width, height, maxParticle) {
         this.particleCount = maxParticle;
         this.particles = [];
         this.image = image;
+        this.image_dust = imaage_dust;
         this.width = width;
         this.height = height;
         this.scene = scene;
@@ -22,10 +23,14 @@ var ParticleSystem = {
         p.lifeSpan = 0;
         return p;
     },
-    addParticle: function(x, y, scale, opacity,  moveX, moveY, lifeSpan) {
+    addParticle: function(x, y, scale, opacity,  moveX, moveY, lifeSpan, dust) {
         for (var i=0; i<this.particleCount; i++) {
             if (!this.particles[i].particleActive) {
                 var p = this.particles[i];
+                if (dust)
+                    p.image = this.image_dust;
+                else
+                    p.image = this.image;
                 p.particleActive = true;
                 p.x = x;
                 p.y = y;
