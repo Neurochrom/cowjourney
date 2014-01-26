@@ -38,7 +38,7 @@ function Particle(){
             var moveX = (Math.random() - 0.5) * 2;
             var moveY = (Math.random() - 0.4) * 0.5;
             var lifeSpan = Math.random()*10 + 20;
-            this.dustSys.addParticle(vec.x, vec.y, 0.3 + Math.random() * 0.3,
+            this.dustSys.addParticle(vec.x, vec.y, 0.2 + Math.random() * 0.3,
                 0.2 + Math.random() * 0.8, moveX, moveY, lifeSpan);
         }
     };

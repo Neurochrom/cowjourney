@@ -30,9 +30,9 @@ world.registerOnClick({}, function(e, par){
     else if(random < 0.7)
         AddMessage("fill this later", new Vec2(e.x, e.y), new Vec2(e.x, e.y-100), 80, "#FFF");
     else if(random < 0.8)
-        AddMessage("Milk me", new Vec2(e.x, e.y), new Vec2(e.x, e.y-100), 80, "#FFF");
+        AddMessage("Milk me", new Vec2(e.x, e.y), new Vec2(e.x, e.y-100), 80, "#FFEAA2");
     else if(random < 0.9)
-        AddMessage("More grass, more milk!", new Vec2(e.x, e.y), new Vec2(e.x, e.y-100), 80, "#FFF");
+        AddMessage("More grass, more milk!", new Vec2(e.x, e.y), new Vec2(e.x, e.y-100), 80, "#AEFFAE");
     else if(random >= 0.9)
         AddMessage("Moo, Sir!", new Vec2(e.x, e.y), new Vec2(e.x, e.y-100), 80, "#FFF");
 

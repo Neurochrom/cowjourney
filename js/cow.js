@@ -35,6 +35,16 @@ var Cow = Class.create(Animal, {
                 }
             }
             this.followedObject.groupie = this;
+            var col = Math.floor(Math.random() * 5);
+            var color = "#FFF";
+            switch(col){
+                case 0: color = "#AEAEAE"; break;
+                case 1: color = "#7EAE9E"; break;
+                case 2: color = "#FEFEAE"; break;
+                case 3: color = "#FFAEFF"; break;
+                case 4: color = "#AA82FF"; break;
+            }
+            AddMessage("moo!", this.pos, this.pos.addV(new Vec2(Math.random() * 200 - 50, Math.random() * 200 - 50)), 80, color);
         }
         //console.log("end smell");
     }

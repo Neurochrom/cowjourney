@@ -193,6 +193,7 @@ var world = (function(){
         this.game.preload("img/brick.png");
         this.game.preload("img/camp.png");
         this.game.preload("img/house.png");
+        this.game.preload("img/gras1.png");
         this.game.preload("img/wood.png");
         this.game.preload("img/wood_c.png");
         this.game.preload("img/wood_cd.png");

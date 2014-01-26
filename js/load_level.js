@@ -35,7 +35,7 @@ world.load_level = function(lvl_n) {
 	switch(lvl_n)
 	{
         case 1:
-            background.image = world.game.assets["img/grass2.png"];
+            background.image = world.game.assets["img/gras1.png"];
 
             world.scene.addChild(background);
             world.readMap([[13,6,6,6,14,6,6,6,14,6,6,10],
