@@ -75,6 +75,9 @@ var world = (function(){
                     case 1:
                         path = 'wood.png'
                         break;
+                    case 11:
+                        path = 'wood_h.png'
+                        break;
                     case 2:
                         path = 'brick.png'
                         break;
@@ -153,6 +156,7 @@ var world = (function(){
         this.game.preload("img/camp.png");
         this.game.preload("img/house.png");
         this.game.preload("img/wood.png");
+        this.game.preload("img/wood_h.png");
         this.game.preload("img/cow_animation.png");
         this.game.preload("img/cow_ass.png");
         this.game.preload("img/cow_animation.png");
