@@ -106,6 +106,7 @@ var world = (function(){
                     case 20:  new Player (field_position, newscale); continue;
                     case 30:  new Cow    (field_position, newscale); continue;
                     case 40:  new Beaver (field_position, newscale); continue;
+                    case 50:  new NKBeaver(field_position, newscale); continue;
                 }
 
                 var img = world.game.assets['img/' + path];
@@ -176,6 +177,8 @@ var world = (function(){
         this.game.preload("img/cow_ass.png");
         this.game.preload("img/beaver_animation.png");
         this.game.preload("img/beaver_ass.png");
+        this.game.preload("img/nkbeaver_animation.png");
+        this.game.preload("img/nkbeaver_ass.png");
 
 
         for(var i = 0; i < this.preloadStash.length; i++){
