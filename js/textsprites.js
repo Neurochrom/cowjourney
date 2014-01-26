@@ -6,7 +6,6 @@ var TextSprite = Class.create(Label, {
         this.font  = "24px Comic Sans MS";
         this.textAlign = "center";
         world.scene.addChild(this);
-
     },
 
     show : function(text, p_center, p_dest, p_lifespan, p_color)

@@ -19,7 +19,7 @@ function getHeight(){
         xHeight = window.screen.availHeight;
 
     if(window.innerHeight != null)
-        xHeight =   window.innerHeight;
+        xHeight = window.innerHeight;
 
     if(document.body != null)
         xHeight = document.body.clientHeight;
@@ -73,19 +73,52 @@ var world = (function(){
                     case 0:
                         continue;
                     case 1:
-                        path = 'wood.png'
+                        path = 'camp.png'
+                        break;
+                    case 2:
+                        path = 'wood_l.png'
+                        break;
+                    case 3:
+                        path = 'wood_u.png'
+                        break;
+                    case 4:
+                        path = 'wood_rd.png'
+                        break;
+                    case 5:
+                        path = 'wood_r.png'
+                        break;
+                    case 6:
+                        path = 'wood_w.png'
+                        break;
+                    case 7:
+                        path = 'wood_ld.png'
+                        break;
+                    case 8:
+                        path = 'wood_cu.png'
+                        break;
+                    case 9:
+                        path = 'wood_d.png'
+                        break;
+                    case 10:
+                        path = 'wood_ru.png'
                         break;
                     case 11:
                         path = 'wood_h.png'
                         break;
-                    case 2:
-                        path = 'brick.png'
+                    case 12:
+                        path = 'wood_cl.png'
                         break;
-                    case 3:
-                        path = 'house.png'
+                    case 13:
+                        path = 'wood_lu.png'
                         break;
-                    case 4:
-                        path = 'camp.png'
+                    case 14:
+                        path = 'wood_cd.png'
+                        break;
+                    case 15:
+                        path = 'wood_cr.png'
+                        break;
+                    case 16:
+                        path = 'wood_c.png'
                         break;
                     case 20:
                         var a1 = new Player(this.field_size.mulV(new Vec2(j, i)));
@@ -94,20 +127,13 @@ var world = (function(){
                         new Cow(this.field_size.mulV(new Vec2(j, i)));
                         continue;
                     case 40:
-                        //new Wombat(this.field_size.mulV(new Vec2(j, i)));
+                        new Beaver(this.field_size.mulV(new Vec2(j, i)));
                         continue;
                 }
 
                 var img = world.game.assets['img/' + path];
                 var sprite = new Sprite(img.width, img.height);
                 sprite.image = img;
-
-                // wypieprzony padding Piotra
-                //var padding = 0.02;
-                //var paddedField = this.field_size.mulS(1 + padding * 2);
-
-                //sprite.scale(paddedField.x / img.width, paddedField.y / img.height);
-                //sprite.pos = this.field_size.mulV(new Vec2(j * (1 - padding),i * (1 - padding)));
 
                 var newscale = new Vec2(this.field_size.x/ img.width, this.field_size.y/ img.height);
                 sprite.scale(newscale.x, newscale.y);
@@ -156,9 +182,21 @@ var world = (function(){
         this.game.preload("img/camp.png");
         this.game.preload("img/house.png");
         this.game.preload("img/wood.png");
+        this.game.preload("img/wood_c.png");
+        this.game.preload("img/wood_cd.png");
+        this.game.preload("img/wood_cl.png");
+        this.game.preload("img/wood_cr.png");
+        this.game.preload("img/wood_cu.png");
+        this.game.preload("img/wood_d.png");
         this.game.preload("img/wood_h.png");
-        this.game.preload("img/cow_animation.png");
-        this.game.preload("img/cow_ass.png");
+        this.game.preload("img/wood_l.png");
+        this.game.preload("img/wood_ld.png");
+        this.game.preload("img/wood_lu.png");
+        this.game.preload("img/wood_r.png");
+        this.game.preload("img/wood_rd.png");
+        this.game.preload("img/wood_ru.png");
+        this.game.preload("img/wood_u.png");
+        this.game.preload("img/wood_w.png");
         this.game.preload("img/cow_animation.png");
         this.game.preload("img/cow_ass.png");
         this.game.preload("img/beaver_animation.png");
@@ -169,16 +207,20 @@ var world = (function(){
             this.game.preload( this.preloadStash[i]);
         }
 
-        world.game.onload = function(){
+        this.loadnormalgame = function (){
             world.game.pushScene(scene);
             world.load_level(1);
-
             world.par.init();
-            //world.music.init();
-
             for(var i = 0; i < world.onStartStash.length; i++){
                 world.onStartStash[i].fun(world.onStartStash[i].par);
             }
+        }
+
+        world.game.onload = function(){
+            var mainmenu = new MainMenu();
+            world.game.pushScene(mainmenu);
+            // moved to this.loadnormalgame
+
         };
         this.game.start();
     }
