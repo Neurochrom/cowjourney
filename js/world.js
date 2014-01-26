@@ -242,6 +242,8 @@ var world = (function(){
             for(var i = 0; i < world.onStartStash.length; i++){
                 world.onStartStash[i].fun(world.onStartStash[i].par);
             }
+
+            AddMessage("Collect Cows and find Home!", world.size.mulV(new Vec2(0.5,0.1)),world.size.mulV(new Vec2(0.5,0.1)), 100, "#FFF");
         }
 
         world.game.onload = function(){
