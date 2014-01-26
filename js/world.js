@@ -31,6 +31,7 @@ var world = (function(){
 
     this.game = null;
     this.scene = null;
+    this.current_level = 0;
 
     this.init = function(game){
         this.game = game;
@@ -220,8 +221,12 @@ var world = (function(){
             this.game.preload( this.preloadStash[i]);
         }
 
-        this.loadnormalgame = function (){
-            world.game.pushScene(scene);
+        world.next_level = function(){
+            world.load_level(++world.current_level)
+        }
+
+        world.loadnormalgame = function(){
+            world.game.replaceScene(world.scene);
             world.load_level(1);
             world.par.init();
             for(var i = 0; i < world.onStartStash.length; i++){
