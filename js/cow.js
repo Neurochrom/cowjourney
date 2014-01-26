@@ -3,7 +3,7 @@ var Cow = Class.create(Animal, {
         Animal.call(this, 64, 64,
             "cow",
             18,
-            pos, 30, 120, scale);
+            pos, 30, 120, scale.mulS(0.8));
     },
 
     smell: function (a) {
