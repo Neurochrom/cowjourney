@@ -45,7 +45,9 @@ var world = (function(){
     this.addAnimal = function(animal, ass){
         this.animals.push(animal);
 
-        this.scene.addChild(ass);
+        if(ass != null)
+            this.scene.addChild(ass);
+
         this.scene.addChild(animal);
     };
 
@@ -83,68 +85,27 @@ var world = (function(){
                     (newscale.y*h - h) / 2);
                 var field_position = this.field_size.mulV(new Vec2(j, i)).addV(this.diffScale).addV(this.padding);
                 switch(map[i][j]){
-                    case 0:
-                        continue;
-                    case 1:
-                        path = 'camp.png'
-                        break;
-                    case 2:
-                        path = 'wood_l.png'
-                        break;
-                    case 3:
-                        path = 'wood_u.png'
-                        break;
-                    case 4:
-                        path = 'wood_rd.png'
-                        break;
-                    case 5:
-                        path = 'wood_r.png'
-                        break;
-                    case 6:
-                        path = 'wood_w.png'
-                        break;
-                    case 7:
-                        path = 'wood_ld.png'
-                        break;
-                    case 8:
-                        path = 'wood_cu.png'
-                        break;
-                    case 9:
-                        path = 'wood_d.png'
-                        break;
-                    case 10:
-                        path = 'wood_ru.png'
-                        break;
-                    case 11:
-                        path = 'wood_h.png'
-                        break;
-                    case 12:
-                        path = 'wood_cl.png'
-                        break;
-                    case 13:
-                        path = 'wood_lu.png'
-                        break;
-                    case 14:
-                        path = 'wood_cd.png'
-                        break;
-                    case 15:
-                        path = 'wood_cr.png'
-                        break;
-                    case 16:
-                        path = 'wood_c.png'
-                        break;
-                    case 17:
-                        path = 'house.png'
-                        break;
-                    case 20:
-                        var a1 = new Player(field_position, newscale);
-                        continue;
-                    case 30:
-                        new Cow(field_position, newscale);
-                        continue;
-                    case 40:
-                        new Beaver(field_position, newscale);
-                        continue;
+                    case 0:                          continue;
+                    case 1:   path = 'camp.png'    ;    break;
+                    case 2:   path = 'wood_l.png'  ;    break;
+                    case 3:   path = 'wood_u.png'  ;    break;
+                    case 4:   path = 'wood_rd.png' ;    break;
+                    case 5:   path = 'wood_r.png'  ;    break;
+                    case 6:   path = 'wood_w.png'  ;    break;
+                    case 7:   path = 'wood_ld.png' ;    break;
+                    case 8:   path = 'wood_cu.png' ;    break;
+                    case 9:   path = 'wood_d.png'  ;    break;
+                    case 10:  path = 'wood_ru.png' ;    break;
+                    case 11:  path = 'wood_h.png'  ;    break;
+                    case 12:  path = 'wood_cl.png' ;    break;
+                    case 13:  path = 'wood_lu.png' ;    break;
+                    case 14:  path = 'wood_cd.png' ;    break;
+                    case 15:  path = 'wood_cr.png' ;    break;
+                    case 16:  path = 'wood_c.png'  ;    break;
+                    case 17:  new House  (field_position, newscale); continue;
+                    case 20:  new Player (field_position, newscale); continue;
+                    case 30:  new Cow    (field_position, newscale); continue;
+                    case 40:  new Beaver (field_position, newscale); continue;
                 }
 
                 var img = world.game.assets['img/' + path];
