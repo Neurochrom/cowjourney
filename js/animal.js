@@ -60,6 +60,14 @@ var Animal = Class.create(Sprite, {
                     this.speed = this.speed.addV(to.mulS(0.1));
                     //this.speed.normalize();
                 }
+
+                var tov = this.followedObject.center().subV(this.center());
+                if ( (tov.lengthSqr() > this.rSense*this.rSense*1.5) && 'type' in this.followedObject) {
+                    if (this.followedObject.groupie == this)
+                        this.followedObject.groupie = null;
+                    this.followedObject = null;
+                }
+
             } else {
                 //this.speed = this.speed.mulS(0);
             }
@@ -108,8 +116,21 @@ var Animal = Class.create(Sprite, {
         this.bleed = 1;
         //world.par.slaughter(this.pos);
         this.headOff = -4;
+    },
+    detachAnimal : function() {
+        //console.log("detatch start id " + this.id );
+        if (this.followedObject && this.followedObject.groupie==this) {
+            //console.log("detatch groupie foll.id " + this.followedObject.id );
+            this.followedObject.groupie = null;
+        }
+        this.followedObject = null;
+        //console.log("detatch end");
     }
+
 });
+
+
+
 
 world.smell = function() {
     // O(n^2) - slow as shit quick solution
