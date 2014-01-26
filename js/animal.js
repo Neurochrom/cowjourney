@@ -106,19 +106,27 @@ var Animal = Class.create(Sprite, {
     id : 0,
     isPlayer : 0,
     groupie : null,
+
     smell : function(a) {
     },
+
     onColidedWith : function(a) {
         stun(this);
     },
+
     bleed : 0,
     dead : 0,
+
     onDie : function() {
         this.dead = 1;
         this.bleed = 1;
         //world.par.slaughter(this.pos);
         this.headOff = -4;
+
+        if(this.isPlayer)
+            world.game.replaceScene(new GameOver());
     },
+
     detachAnimal : function() {
         //console.log("detatch start id " + this.id );
         if (this.followedObject && this.followedObject.groupie==this) {
@@ -128,7 +136,6 @@ var Animal = Class.create(Sprite, {
         this.followedObject = null;
         //console.log("detatch end");
     }
-
 });
 
 
