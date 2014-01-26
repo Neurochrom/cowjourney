@@ -51,56 +51,105 @@ var world = (function(){
     this.isObstacleAt = function(pos){
         var p = pos.divV(this.field_size);
         if(this.obstacles[Math.floor(p.y)] && this.obstacles[Math.floor(p.y)][Math.floor(p.x)])
-                return true;
-
+            return true;
         return false;
     };
 
     this.field_size = null;
-
+    this.padding = new Vec2(0,0);
     this.readMap = function(map){
         var maps_size = new Vec2(map[0].length, map.length);
-        this.field_size = this.size.divV(maps_size);
+        this.field_size = this.size.divV(maps_size.mulS(1.05));
 
+        if(this.field_size.x < this.field_size.y)
+            this.field_size.y = this.field_size.x;
+        else
+            this.field_size.x = this.field_size.y;
+
+        this.padding = this.size.subV(this.field_size.mulV(maps_size)).mulS(0.5);
         for(var i = 0; i < map.length; i++){
             this.obstacles[i] = {};
 
             for(var j = 0; j < map[i].length; j++){
 
                 var path = null;
+                var h = 64;
+                var w = 64;
+                var newscale = new Vec2(this.field_size.x/ w, this.field_size.y/ h);
+                var diffScale = new Vec2((newscale.x*w - w) / 2,
+                    (newscale.y*h - h) / 2);
+                var field_position = this.field_size.mulV(new Vec2(j, i)).addV(diffScale).addV(this.padding);
                 switch(map[i][j]){
-                    case 0:                          continue;
-                    case 1:   path = 'camp.png'    ;    break;
-                    case 2:   path = 'wood_l.png'  ;    break;
-                    case 3:   path = 'wood_u.png'  ;    break;
-                    case 4:   path = 'wood_rd.png' ;    break;
-                    case 5:   path = 'wood_r.png'  ;    break;
-                    case 6:   path = 'wood_w.png'  ;    break;
-                    case 7:   path = 'wood_ld.png' ;    break;
-                    case 8:   path = 'wood_cu.png' ;    break;
-                    case 9:   path = 'wood_d.png'  ;    break;
-                    case 10:  path = 'wood_ru.png' ;    break;
-                    case 11:  path = 'wood_h.png'  ;    break;
-                    case 12:  path = 'wood_cl.png' ;    break;
-                    case 13:  path = 'wood_lu.png' ;    break;
-                    case 14:  path = 'wood_cd.png' ;    break;
-                    case 15:  path = 'wood_cr.png' ;    break;
-                    case 16:  path = 'wood_c.png'  ;    break;
-                    case 17:  path = 'house.png'   ;    break;
-                    case 20:  new Player ( this.field_size.mulV( new Vec2(j, i)) ); continue;
-                    case 30:  new Cow    ( this.field_size.mulV( new Vec2(j, i)) ); continue;
-                    case 40:  new Beaver ( this.field_size.mulV( new Vec2(j, i)) ); continue;
+                    case 0:
+                        continue;
+                    case 1:
+                        path = 'camp.png'
+                        break;
+                    case 2:
+                        path = 'wood_l.png'
+                        break;
+                    case 3:
+                        path = 'wood_u.png'
+                        break;
+                    case 4:
+                        path = 'wood_rd.png'
+                        break;
+                    case 5:
+                        path = 'wood_r.png'
+                        break;
+                    case 6:
+                        path = 'wood_w.png'
+                        break;
+                    case 7:
+                        path = 'wood_ld.png'
+                        break;
+                    case 8:
+                        path = 'wood_cu.png'
+                        break;
+                    case 9:
+                        path = 'wood_d.png'
+                        break;
+                    case 10:
+                        path = 'wood_ru.png'
+                        break;
+                    case 11:
+                        path = 'wood_h.png'
+                        break;
+                    case 12:
+                        path = 'wood_cl.png'
+                        break;
+                    case 13:
+                        path = 'wood_lu.png'
+                        break;
+                    case 14:
+                        path = 'wood_cd.png'
+                        break;
+                    case 15:
+                        path = 'wood_cr.png'
+                        break;
+                    case 16:
+                        path = 'wood_c.png'
+                        break;
+                    case 17:
+                        path = 'house.png'
+                        break;
+                    case 20:
+                        var a1 = new Player(this.field_size.mulV(new Vec2(j, i)));
+                        continue;
+                    case 30:
+                        new Cow(this.field_size.mulV(new Vec2(j, i)));
+                        continue;
+                    case 40:
+                        new Beaver(this.field_size.mulV(new Vec2(j, i)));
+                        continue;
                 }
 
                 var img = world.game.assets['img/' + path];
                 var sprite = new Sprite(img.width, img.height);
                 sprite.image = img;
 
-                var newscale = new Vec2(this.field_size.x/ img.width, this.field_size.y/ img.height);
                 sprite.scale(newscale.x, newscale.y);
-                var diffScale = new Vec2((newscale.x*img.width - img.width) / 2,
-                                         (newscale.y*img.height - img.height) / 2);
-                sprite.pos = this.field_size.mulV(new Vec2(j, i)).addV(diffScale);
+                sprite.pos = field_position;
 
                 this.obstacles[i][j] = sprite;
                 this.scene.addChild(sprite);
@@ -119,6 +168,7 @@ var world = (function(){
     this.registerOnUpdate = function(param, item){
         this.onUpdateStash.push({fun: item, par: param});
     }
+
 
     this.onClickStash = [];
     this.registerOnClick = function(param, item){
