@@ -120,6 +120,9 @@ var world = (function(){
                     case 16:
                         path = 'wood_c.png'
                         break;
+                    case 17:
+                        path = 'house.png'
+                        break;
                     case 20:
                         var a1 = new Player(this.field_size.mulV(new Vec2(j, i)));
                         continue;
