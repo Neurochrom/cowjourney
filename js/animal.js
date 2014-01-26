@@ -33,6 +33,8 @@ var Animal = Class.create(Sprite, {
             if(this.bleed) {
                 if(this.age % 22 == 5)
                 world.par.blood(this.pos);
+                if(this.age % 50)
+                    world.music.play(g_SoundEffect.Blood);
             }
 
             if(this.followedObject){

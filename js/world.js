@@ -215,6 +215,11 @@ var world = (function(){
 
         world.next_level = function(){
             world.load_level(++world.current_level)
+
+            world.par.init();
+            for(var i = 0; i < world.onStartStash.length; i++){
+                world.onStartStash[i].fun(world.onStartStash[i].par);
+            }
         }
 
         world.loadnormalgame = function(){

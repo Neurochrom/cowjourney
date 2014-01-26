@@ -17,12 +17,12 @@ world.load_level = function(lvl_n) {
 			world.onClickStash[i].fun(e, world.onClickStash[i].par);
 		}
 
-		//music.play(g_SoundEffect.Cow);
+		music.play(g_SoundEffect.Cow);
 	});
 
 	background.addEventListener("enterframe", function(){
 		ParticleSystem.update();
-		// music.update();
+		music.update();
 		world.smell();
 		world.resolveCollisions(world.findCollidingPairs());
 		for(var i = 0; i < world.onUpdateStash.length; i++){
@@ -34,13 +34,15 @@ world.load_level = function(lvl_n) {
 	background.height = world.size.y;
     background.image = world.game.assets["img/gras1.png"];
 
+    music.init();
+
     world.scene.addChild(background);
 
 	switch(lvl_n)
 	{
         case 1:
             world.readMap([[13,6,6,6,14,6,6,6,14,6,6,10],
-                [11,50,0,0,11,0,0,0,11,0,0,11],
+                [11,50,0,0,11,0,0,0,11,17,0,11],
                 [11,0,0,0,11,0,20,0,11,0,0,11],
                 [11,0,0,0,11,0,5,6,4,0,0,11],
                 [11,0,0,0,11,0,0,0,0,0,0,11],
