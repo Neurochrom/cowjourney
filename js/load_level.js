@@ -31,13 +31,13 @@ world.load_level = function(lvl_n) {
 
 	background.width = world.size.x;
 	background.height = world.size.y;
+    background.image = world.game.assets["img/gras1.png"];
+
+    world.scene.addChild(background);
 
 	switch(lvl_n)
 	{
         case 1:
-            background.image = world.game.assets["img/gras1.png"];
-
-            world.scene.addChild(background);
             world.readMap([[13,6,6,6,14,6,6,6,14,6,6,10],
                 [11,0,0,0,11,0,0,0,11,0,0,11],
                 [11,0,30,0,11,0,20,0,11,0,0,11],
@@ -53,9 +53,6 @@ world.load_level = function(lvl_n) {
             ]);
             break;
 		case 2:
-            background.image = world.game.assets["img/grass2.png"];
-
-            world.scene.addChild(background);
 
             world.readMap([[13,6,6,14,6,6,6,6,6,6,14,6,6,6,6,6,6,6,6,6,6,6,6,6,10],
                 [11,0,0,11,0,0,0,0,0,0,11,0,0,0,0,0,0,0,0,0,0,0,0,0,11],
