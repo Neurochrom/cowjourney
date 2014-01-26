@@ -1,6 +1,6 @@
 var animalId = 0;
-var Animal = Class.create(Sprite, {
 
+var Animal = Class.create(Sprite, {
     initialize : function(width, height, type, headOff, pos, rCol, rSense, scale) {
         //alert( " Animal");
         Sprite.call(this, width, height);
@@ -34,10 +34,9 @@ var Animal = Class.create(Sprite, {
                 world.par.blood(this.pos);
             }
 
-
             if(this.followedObject){
                 var to_be = this.center().addV(this.speed);
-                var to_be = this.center();
+
                 if(world.isObstacleAt(to_be.addV(new Vec2(this.rCol,0)))){
                     if (this.speed.x>0) this.speed.x = 0;
                 }
@@ -133,7 +132,6 @@ var Animal = Class.create(Sprite, {
 
 
 
-
 world.smell = function() {
     // O(n^2) - slow as shit quick solution
     for(var i=0; i<this.animals.length; ++i) {
@@ -205,7 +203,3 @@ var pseudoPhysicalCol = function(a1, a2) {
     a1.speed = a1.speed.subV(j.divS(m1*1.3));
     a2.speed = a2.speed.addV(j.divS(m2*1.3));
 };
-
-
-
-

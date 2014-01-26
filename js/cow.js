@@ -1,4 +1,3 @@
-
 var Cow = Class.create(Animal, {
     initialize : function(pos, scale) {
         Animal.call(this, 64, 64,
@@ -14,8 +13,10 @@ var Cow = Class.create(Animal, {
             while (head && head != this) {
                 if ('isPlayer' in head && head.isPlayer)
                     return;
+
                 if ( !( 'followedObject' in head) )
                     return;
+                
                 head = head.followedObject;
                 if (++limit > 14) {
                     console.log("damn1");

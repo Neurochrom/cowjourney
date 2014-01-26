@@ -218,7 +218,7 @@ var world = (function(){
 
 
         for(var i = 0; i < this.preloadStash.length; i++){
-            this.game.preload( this.preloadStash[i]);
+            this.game.preload(this.preloadStash[i]);
         }
 
         world.next_level = function(){

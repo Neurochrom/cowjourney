@@ -11,6 +11,7 @@ var Beaver = Class.create(Animal, {
             this.followedObject = a;
         }
     },
+    
     onColidedWith : function(a) {
         if (a.type == "cow")
             a.onDie();
