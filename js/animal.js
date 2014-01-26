@@ -1,9 +1,10 @@
+var animalId = 0;
 var Animal = Class.create(Sprite, {
 
     initialize : function(width, height, type, headOff, pos, rCol, rSense) {
         //alert( " Animal");
         Sprite.call(this, width, height);
-
+        this.id = animalId++;
         this.type = type;
 
         this.rCol = rCol;
@@ -49,14 +50,14 @@ var Animal = Class.create(Sprite, {
                 }
             }
             this.pos = this.pos.addV(this.speed);
-            this.speed = this.speed.mulS(this.speed.lengthSqr() > this.rCol ? 0.6 : 0.94);
+            this.speed = this.speed.mulS(this.speed.lengthSqr() > this.rCol ? 0.6 : 0.96);
             if (this.followedObject) {
                 if (this.stunned > 0)
                    this.stunned--;
                 else {
                     var to = this.followedObject.center().subV(this.center());
                     to.normalize();
-                    this.speed = this.speed.addV(to.mulS(0.14));
+                    this.speed = this.speed.addV(to.mulS(0.1));
                     //this.speed.normalize();
                 }
             } else {
@@ -92,6 +93,7 @@ var Animal = Class.create(Sprite, {
     followedObject : null,
     stunned : 0,    // for this many frames the animal will not follow anyone
     type : "",
+    id : 0,
     isPlayer : 0,
     groupie : null,
     smell : function(a) {
@@ -158,11 +160,7 @@ world.resolveCollisions = function(colliding) {
 
 var stun = function(a1) {
     if(!a1.isPlayer) {
-        //a1.followedObject = null;
-        if(a1.followedObject.isPlayer)
-            a1.stunned = 60;
-        else
-            a1.stunned = 10;
+        a1.stunned = 20;
     }
 }
 
