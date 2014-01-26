@@ -63,7 +63,7 @@ var Animal = Class.create(Sprite, {
                 }
 
                 var tov = this.followedObject.center().subV(this.center());
-                if ( (tov.lengthSqr() > this.rSense*this.rSense*1.5) && 'type' in this.followedObject) {
+                if ( (tov.lengthSqr() > this.rSense*this.rSense*1.9) && 'type' in this.followedObject) {
                     if (this.followedObject.groupie == this)
                         this.followedObject.groupie = null;
                     this.followedObject = null;
@@ -120,8 +120,16 @@ var Animal = Class.create(Sprite, {
     },
 
     attachAnimal : function(a) {
-        a.groupie = this;
         this.followedObject = a;
+        var limit = 0;
+        while(this.followedObject.groupie && this.followedObject.groupie != a) {
+            this.followedObject = this.followedObject.groupie;
+            if (++limit > 14) {
+                console.log("damn attach");
+                break;
+            }
+        }
+        this.followedObject.groupie = this;
     },
 
     detachAnimal : function() {
@@ -135,7 +143,7 @@ var Animal = Class.create(Sprite, {
     },
 
     groupSize : function() {
-        var i = 0;
+        var i = 1;
         var g = this.groupie;
         while (g && g!=this) {
             ++i;
@@ -144,12 +152,13 @@ var Animal = Class.create(Sprite, {
                return 15;
         }
         var f = this.followedObject;
-        while (f && f!=this) {
+        while (f && f!=this && 'type' in f) {
             ++i;
             f = f.followedObject;
             if(i>14)
                 return 15;
         }
+        return i;
     }
 
 });

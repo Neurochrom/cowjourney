@@ -10,17 +10,23 @@ var Beaver = Class.create(Animal, {
     cowFriendly : 0,
 
     smell: function(a) {
-        if (a.type == "cow" && !cowFriendly) {
+        if (a.type == "cow" && !this.cowFriendly) {
             if (a.groupSize() > this.groupSize()) {
                 this.detachAnimal();
-                this.attachAnimal(a);
+
+                //this.attachAnimal(a);  // why this is a bug??
+                this.followedObject = a.groupie;
+
                 this.cowFriendly = 1;
+            }
+            else {
+                this.followedObject = a;
             }
         }
     },
     
     onColidedWith : function(a) {
-        if (a.type == "cow")
+        if (a.type == "cow" && !this.cowFriendly)
             a.onDie();
     }
 });

@@ -36,6 +36,7 @@ var Cow = Class.create(Animal, {
                 }
             }
             this.followedObject.groupie = this;
+
             var col = Math.floor(Math.random() * 5);
             var color = "#FFF";
             switch(col){
