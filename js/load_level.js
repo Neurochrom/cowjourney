@@ -7,7 +7,7 @@ world.load_level = function(lvl_n) {
 	var background = new Sprite(world.size.x, world.size.y);
 
 	background.addEventListener('touchstart', function(e) {
-		world.par.blood(new Vec2(e.x-12, e.y-12));
+		world.par.clickDust(new Vec2(e.x-12, e.y-12));
 		world.player.followedObject = {
             center: function() { return new Vec2(e.x, e.y); },
             groupie: world.player
