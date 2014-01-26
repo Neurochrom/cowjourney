@@ -13,6 +13,7 @@ var Animal = Class.create(Sprite, {
 
         var image = world.game.assets["img/"+type+"_animation.png"];
 
+        this.scaleV = scale;
         this.image = image;
         this.frame = 0;
         this.pos = pos;
@@ -38,18 +39,18 @@ var Animal = Class.create(Sprite, {
             }
 
             if(this.followedObject){
-                var to_be = this.center().addV(this.speed);
+                var to_be = this.center();
 
-                if(world.isObstacleAt(to_be.addV(new Vec2(this.rCol,0)))){
+                if(world.isObstacleAt(to_be.addV(new Vec2(this.rCol * this.scaleV.x,0)))){
                     if (this.speed.x>0) this.speed.x = 0;
                 }
-                if(world.isObstacleAt(to_be.addV(new Vec2(0,this.rCol)))){
+                if(world.isObstacleAt(to_be.addV(new Vec2(0,this.rCol * this.scaleV.y)))){
                     if (this.speed.y>0) this.speed.y = 0;
                 }
-                if(world.isObstacleAt(to_be.subV(new Vec2(this.rCol,0)))){
+                if(world.isObstacleAt(to_be.subV(new Vec2(this.rCol * this.scaleV.x,0)))){
                     if (this.speed.x<0) this.speed.x = 0;
                 }
-                if(world.isObstacleAt(to_be.subV(new Vec2(0,this.rCol)))){
+                if(world.isObstacleAt(to_be.subV(new Vec2(0,this.rCol * this.scaleV.y)))){
                     if (this.speed.y<0) this.speed.y = 0;
                 }
             }
@@ -94,9 +95,10 @@ var Animal = Class.create(Sprite, {
         });
     },
     ass : null,
+    scaleV : new Vec2(1,1),
 
     center: function() {
-        return this.pos.addV(new Vec2(this.width*0.5, this.height*0.5));
+        return this.pos.addV(new Vec2(this.width*0.5, this.height*0.5).mulV(this.scaleV));
     },
 
     rCol : 0,

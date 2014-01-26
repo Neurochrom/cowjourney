@@ -53,7 +53,6 @@ var world = (function(){
 
     this.isObstacleAt = function(pos){
         var p = pos.subV(this.diffScale).subV(this.padding).divV(this.field_size);
-
         if(this.obstacles[Math.floor(p.y)] && this.obstacles[Math.floor(p.y)][Math.floor(p.x)])
             return true;
         return false;
