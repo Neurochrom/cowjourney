@@ -3,6 +3,7 @@ var Player = Class.create(Cow, {
         //alert( " Player");
         Cow.call(this, pos);
         this.isPlayer = 1;
+        world.player = this;
     },
 
     smell : function(a) {

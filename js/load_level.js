@@ -8,7 +8,7 @@ world.load_level = function(lvl_n) {
 
 	background.addEventListener('touchstart', function(e) {
 		world.par.blood(new Vec2(e.x-12, e.y-12));
-		a1.followedObject = { center: function() { return new Vec2(e.x, e.y); } };
+		world.player.followedObject = { center: function() { return new Vec2(e.x, e.y); } };
 		for(var i = 0; i < world.onClickStash.length; i++){
 			world.onClickStash[i].fun(e, world.onClickStash[i].par);
 		}

@@ -86,8 +86,6 @@ var world = (function(){
                         break;
                     case 20:
                         var a1 = new Player(this.field_size.mulV(new Vec2(j, i)));
-                        a1.type = "player_cow";
-                        //new Player(new Vec2(i, j).mulV(this.field_size));
                         continue;
                     case 30:
                         new Cow(this.field_size.mulV(new Vec2(j, i)));
