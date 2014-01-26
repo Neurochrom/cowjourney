@@ -41,12 +41,11 @@ var world = (function(){
     this.animals = [];
     this.obstacles = {};
 
-    this.addAnimal = function(animal){
+    this.addAnimal = function(animal, ass){
         this.animals.push(animal);
-        this.scene.addChild(animal);
-    };
-    this.addAnimalsAss = function(ass){
+
         this.scene.addChild(ass);
+        this.scene.addChild(animal);
     };
 
     this.isObstacleAt = function(pos){

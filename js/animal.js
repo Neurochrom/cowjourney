@@ -24,8 +24,7 @@ var Animal = Class.create(Sprite, {
         this.ass = new Sprite(width, height);
         this.ass.image = assImage;
         this.ass.pos = this.pos.addV(new Vec2(0,this.headOff));
-        world.addAnimalsAss(this.ass);
-        world.addAnimal(this);
+        world.addAnimal(this, this.ass);
 
         this.addEventListener("enterframe", function(){
             if(this.bleed) {
