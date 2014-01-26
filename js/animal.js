@@ -118,6 +118,12 @@ var Animal = Class.create(Sprite, {
         //world.par.slaughter(this.pos);
         this.headOff = -4;
     },
+
+    attachAnimal : function(a) {
+        a.groupie = this;
+        this.followedObject = a;
+    },
+
     detachAnimal : function() {
         //console.log("detatch start id " + this.id );
         if (this.followedObject && this.followedObject.groupie==this) {
@@ -126,6 +132,24 @@ var Animal = Class.create(Sprite, {
         }
         this.followedObject = null;
         //console.log("detatch end");
+    },
+
+    groupSize : function() {
+        var i = 0;
+        var g = this.groupie;
+        while (g && g!=this) {
+            ++i;
+            g = g.groupie;
+            if(i>14)
+               return 15;
+        }
+        var f = this.followedObject;
+        while (f && f!=this) {
+            ++i;
+            f = f.followedObject;
+            if(i>14)
+                return 15;
+        }
     }
 
 });

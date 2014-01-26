@@ -4,11 +4,18 @@ var Beaver = Class.create(Animal, {
             "beaver",
             9,
             pos, 30, 190, scale);
+        this.cowFriendly = 0;
     },
 
+    cowFriendly : 0,
+
     smell: function(a) {
-        if (a.type == "cow") {
-            this.followedObject = a;
+        if (a.type == "cow" && !cowFriendly) {
+            if (a.groupSize() > this.groupSize()) {
+                this.detachAnimal();
+                this.attachAnimal(a);
+                this.cowFriendly = 1;
+            }
         }
     },
     
