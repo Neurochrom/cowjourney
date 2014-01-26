@@ -73,16 +73,16 @@ var world = (function(){
                     case 0:
                         continue;
                     case 1:
-                        path = 'trees_1.png'
+                        path = 'wood.png'
                         break;
                     case 2:
-                        path = 'trees_2.png'
+                        path = 'brick.png'
                         break;
                     case 3:
-                        path = 'trees_3.png'
+                        path = 'house.png'
                         break;
                     case 4:
-                        path = 'trees_4.png'
+                        path = 'camp.png'
                         break;
                     case 20:
                         var a1 = new Player(this.field_size.mulV(new Vec2(j, i)));
@@ -144,10 +144,10 @@ var world = (function(){
         this.game.preload(this.par.preload);
         this.game.preload(this.music.preload);
         this.game.preload("img/grass2.png");
-        this.game.preload("img/trees_1.png");
-        this.game.preload("img/trees_2.png");
-        this.game.preload("img/trees_3.png");
-        this.game.preload("img/trees_4.png");
+        this.game.preload("img/brick.png");
+        this.game.preload("img/camp.png");
+        this.game.preload("img/house.png");
+        this.game.preload("img/wood.png");
         this.game.preload("img/cow_animation.png");
         this.game.preload("img/cow_ass.png");
         this.game.preload("img/cow_animation.png");
