@@ -38,7 +38,7 @@ var Animal = Class.create(Sprite, {
                     world.music.play(g_SoundEffect.Blood);
             }
 
-            if(this.followedObject){
+            if(true){
                 var to_be = this.center();
 
                 if(world.isObstacleAt(to_be.addV(new Vec2(this.rCol * this.scaleV.x,0)))){
