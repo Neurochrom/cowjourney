@@ -70,68 +70,27 @@ var world = (function(){
 
                 var path = null;
                 switch(map[i][j]){
-                    case 0:
-                        continue;
-                    case 1:
-                        path = 'camp.png'
-                        break;
-                    case 2:
-                        path = 'wood_l.png'
-                        break;
-                    case 3:
-                        path = 'wood_u.png'
-                        break;
-                    case 4:
-                        path = 'wood_rd.png'
-                        break;
-                    case 5:
-                        path = 'wood_r.png'
-                        break;
-                    case 6:
-                        path = 'wood_w.png'
-                        break;
-                    case 7:
-                        path = 'wood_ld.png'
-                        break;
-                    case 8:
-                        path = 'wood_cu.png'
-                        break;
-                    case 9:
-                        path = 'wood_d.png'
-                        break;
-                    case 10:
-                        path = 'wood_ru.png'
-                        break;
-                    case 11:
-                        path = 'wood_h.png'
-                        break;
-                    case 12:
-                        path = 'wood_cl.png'
-                        break;
-                    case 13:
-                        path = 'wood_lu.png'
-                        break;
-                    case 14:
-                        path = 'wood_cd.png'
-                        break;
-                    case 15:
-                        path = 'wood_cr.png'
-                        break;
-                    case 16:
-                        path = 'wood_c.png'
-                        break;
-                    case 17:
-                        path = 'house.png'
-                        break;
-                    case 20:
-                        var a1 = new Player(this.field_size.mulV(new Vec2(j, i)));
-                        continue;
-                    case 30:
-                        new Cow(this.field_size.mulV(new Vec2(j, i)));
-                        continue;
-                    case 40:
-                        new Beaver(this.field_size.mulV(new Vec2(j, i)));
-                        continue;
+                    case 0:                          continue;
+                    case 1:   path = 'camp.png'    ;    break;
+                    case 2:   path = 'wood_l.png'  ;    break;
+                    case 3:   path = 'wood_u.png'  ;    break;
+                    case 4:   path = 'wood_rd.png' ;    break;
+                    case 5:   path = 'wood_r.png'  ;    break;
+                    case 6:   path = 'wood_w.png'  ;    break;
+                    case 7:   path = 'wood_ld.png' ;    break;
+                    case 8:   path = 'wood_cu.png' ;    break;
+                    case 9:   path = 'wood_d.png'  ;    break;
+                    case 10:  path = 'wood_ru.png' ;    break;
+                    case 11:  path = 'wood_h.png'  ;    break;
+                    case 12:  path = 'wood_cl.png' ;    break;
+                    case 13:  path = 'wood_lu.png' ;    break;
+                    case 14:  path = 'wood_cd.png' ;    break;
+                    case 15:  path = 'wood_cr.png' ;    break;
+                    case 16:  path = 'wood_c.png'  ;    break;
+                    case 17:  path = 'house.png'   ;    break;
+                    case 20:  new Player ( this.field_size.mulV( new Vec2(j, i)) ); continue;
+                    case 30:  new Cow    ( this.field_size.mulV( new Vec2(j, i)) ); continue;
+                    case 40:  new Beaver ( this.field_size.mulV( new Vec2(j, i)) ); continue;
                 }
 
                 var img = world.game.assets['img/' + path];
@@ -161,7 +120,6 @@ var world = (function(){
     this.registerOnUpdate = function(param, item){
         this.onUpdateStash.push({fun: item, par: param});
     }
-
 
     this.onClickStash = [];
     this.registerOnClick = function(param, item){
