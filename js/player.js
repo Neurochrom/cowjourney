@@ -8,5 +8,7 @@ var Player = Class.create(Cow, {
 
     smell : function(a) {
         var xxx=2;
-    }
+    },
+
+    score: 0
 });

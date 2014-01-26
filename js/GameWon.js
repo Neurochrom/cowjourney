@@ -1,6 +1,6 @@
 var GameWon = Class.create(Scene, {
     initialize: function() {
-        var game, label, bg, cow, beaver, camp, tick, message;
+        var game, label, bg, cow, beaver, camp, tick, score, message;
         var ScreenW = world.size.x;
         var ScreenH = world.size.y;
 
@@ -24,6 +24,14 @@ var GameWon = Class.create(Scene, {
         label.color = "#2F2";
         label.y = ScreenH/20;
         label.scale(scale);
+
+        score = new Label("Your score: " + world.player.score);
+        score.width = ScreenW;
+        score.font = "32px Comic Sans MS";
+        score.textAlign = "center";
+        score.color = "#55F";
+        score.y = 3/20*ScreenH;
+        score.scale(scale);
 
         message = new Label("Click to play again");
         message.width = ScreenW;
@@ -86,6 +94,7 @@ var GameWon = Class.create(Scene, {
         this.addChild(label);
         this.addChild(cow);
         this.addChild(beaver);
+        this.addChild(score);
         this.addChild(message);
     }
 });

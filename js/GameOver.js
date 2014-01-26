@@ -1,6 +1,6 @@
 var GameOver = Class.create(Scene, {
     initialize: function() {
-        var game, label, bg, beaver, tick, message;
+        var game, label, bg, beaver, tick, score, message;
         var ScreenW = world.size.x;
         var ScreenH = world.size.y;
 
@@ -24,6 +24,14 @@ var GameOver = Class.create(Scene, {
         label.color = "#F22";
         label.y = ScreenH/20;
         label.scale(scale);
+
+        score = new Label("Your score: " + world.player.score);
+        score.width = ScreenW;
+        score.font = "32px Comic Sans MS";
+        score.textAlign = "center";
+        score.color = "#55F";
+        score.y = 3/20*ScreenH;
+        score.scale(scale);
 
         message = new Label("Click to try again");
         message.width = ScreenW;
@@ -65,6 +73,7 @@ var GameOver = Class.create(Scene, {
         this.addChild(bg);
         this.addChild(label);
         this.addChild(beaver);
+        this.addChild(score);
         this.addChild(message);
     }
 });
