@@ -103,7 +103,7 @@ var world = (function(){
                     case 20:  continue;
                     case 30:  continue;
                     case 40:  continue;
-                    case 50:   continue;
+                    case 50:  continue;
                 }
                 var img = world.game.assets['img/shadow.png'];
                 var shadow = new Sprite(img.width, img.height);
