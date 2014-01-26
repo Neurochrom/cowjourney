@@ -15,7 +15,7 @@ var Beaver = Class.create(Animal, {
                 this.detachAnimal();
 
                 //this.attachAnimal(a);  // why this is a bug??
-                this.followedObject = a.groupie;
+                this.followedObject = a; //.groupie;
 
                 this.cowFriendly = 1;
             }
