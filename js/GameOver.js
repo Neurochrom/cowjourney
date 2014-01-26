@@ -44,8 +44,8 @@ var GameOver = Class.create(Scene, {
 
         beaver = new Sprite(64, 64);
         beaver.image = game.assets["img/nkbeaver_animation.png"];
-        beaver.x = ScreenW/2;
-        beaver.y = ScreenH/2;
+        beaver.x = ScreenW/2 - beaver.width *0.5;
+        beaver.y = ScreenH/2 - beaver.height*0.5;
         beaver.scale(scale);
 
         bg = new Sprite(world.size.x, world.size.y);

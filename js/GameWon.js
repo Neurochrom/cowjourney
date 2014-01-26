@@ -17,7 +17,7 @@ var GameWon = Class.create(Scene, {
         else
             scale = sw;
 
-        label = new Label("Ccngratulations! You won the game!");
+        label = new Label("Congratulations! You won the game!");
         label.width = ScreenW;
         label.font = "58px Comic Sans MS";
         label.textAlign = "center";
@@ -44,20 +44,20 @@ var GameWon = Class.create(Scene, {
 
         cow = new Sprite(64, 64);
         cow.image = game.assets["img/cow_animation.png"];
-        cow.x = ScreenW/2;
-        cow.y = ScreenH/2;
+        cow.x = ScreenW/2 - cow.width *0.5;
+        cow.y = ScreenH/2 - cow.height*0.5;
         cow.scale(scale);
 
         beaver = new Sprite(64, 64);
         beaver.image = game.assets["img/beaver_animation.png"];
-        beaver.x = ScreenW/2;
-        beaver.y = ScreenH/2;
+        beaver.x = ScreenW/2 - beaver.width *0.5;
+        beaver.y = ScreenH/2 - beaver.height*0.5;
         beaver.scale(scale);
 
         camp = new Sprite(64, 64);
         camp.image = game.assets["img/camp.png"];
-        camp.x = ScreenW/2;
-        camp.y = ScreenH/2;
+        camp.x = ScreenW/2 - camp.width *0.5 ;
+        camp.y = ScreenH/2 - camp.height*0.5 ;
         camp.scale(scale);
 
         bg = new Sprite(world.size.x, world.size.y);
@@ -70,11 +70,11 @@ var GameWon = Class.create(Scene, {
         tick = 0;
         game.addEventListener(Event.ENTER_FRAME, function()
         {
-            cow.x = ScreenW/2 + scale*100*Math.sin((tick+80)/60);
-            cow.y = ScreenH/2 + scale*100*Math.cos((tick+80)/60);
+            cow.x = ScreenW/2 - cow.width *0.5 + scale*100*Math.sin((tick+80)/60);
+            cow.y = ScreenH/2 - cow.height*0.5 + scale*100*Math.cos((tick+80)/60);
 
-            beaver.x = ScreenW/2 + scale*100*Math.sin(tick/60);
-            beaver.y = ScreenH/2 + scale*100*Math.cos(tick/60);
+            beaver.x = ScreenW/2 - beaver.width *0.5 + scale*100*Math.sin(tick/60);
+            beaver.y = ScreenH/2 - beaver.height*0.5 + scale*100*Math.cos(tick/60);
 
             if(tick % 10 == 0)
             {
