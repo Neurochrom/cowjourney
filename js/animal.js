@@ -54,7 +54,7 @@ var Animal = Class.create(Sprite, {
                     if (this.speed.y<0) this.speed.y = 0;
                 }
             }
-            this.pos = this.pos.addV(this.speed);
+            this.pos = this.pos.addV(this.speed.mulV(this.scaleV));
             this.speed = this.speed.mulS(this.speed.lengthSqr() > this.rCol ? 0.6 : 0.96);
             if (this.followedObject) {
                 if (this.stunned > 0)
@@ -79,8 +79,8 @@ var Animal = Class.create(Sprite, {
 
             this.frame += (this.age % 5 == 0) ? 1 : 0;
             if(this.frame > 10) this.frame = 0;
-            this.ass.pos = this.pos.subV(this.speed.mulV(this.speed.mulV(this.speed)))
-                               .addV(new Vec2(0,this.headOff));
+            this.ass.pos = this.pos.subV(this.speed.mulV(this.speed.mulV(this.speed)).mulV(this.scaleV))
+                               .addV(new Vec2(0,this.headOff * this.scaleV.y));
             this.rotate((Math.sin(this.age/this.rotationDiv - this.rotationDiv / 2)*this.rotationMul));
             var tmp = this.speed.length();
             this.ass.rotate(0.2 * Math.sin(tmp * this.age * 10));
