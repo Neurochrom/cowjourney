@@ -14,8 +14,8 @@ var Beaver = Class.create(Animal, {
             if (a.groupSize() > this.groupSize()) {
                 this.detachAnimal();
 
-                //this.attachAnimal(a);  // why this is a bug??
-                this.followedObject = a; //.groupie;
+                this.attachAnimal(a);  // why this is a bug??
+                //this.followedObject = a; //.groupie;
 
                 this.cowFriendly = 1;
             }

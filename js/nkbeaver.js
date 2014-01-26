@@ -10,11 +10,18 @@ var NKBeaver = Class.create(Animal, {
 
     smell: function(a) {
         if (a.type == "cow") {
-            this.followedObject = a;
+            var herd = a.herd();
+            for (var i=0; i<herd.length; ++i) {
+                if (herd[i].type == "beaver") {
+                    this.followedObject = herd[i];
+                }
+            }
         }
     },
     onColidedWith : function(a) {
-        if (a.type == "cow")
-            a.onDie();
+        if (a.type == "cow") {
+            if (this.followedObject && this.followedObject.type != "beaver")
+                a.onDie();
+        }
     }
 });

@@ -155,6 +155,21 @@ var Animal = Class.create(Sprite, {
         //console.log("detatch end");
     },
 
+    herd: function() {
+        var h = [];
+        var f = this.followedObject;
+        while (f && f!=this) {
+            h.push(f);
+            f = f.followedObject;
+        }
+        var g = this.groupie;
+        while (g && g!=this) {
+            h.push(g);
+            g = g.groupie;
+        }
+        return h;
+    },
+
     groupSize : function() {
         var i = 1;
         var g = this.groupie;
