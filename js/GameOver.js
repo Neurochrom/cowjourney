@@ -17,7 +17,7 @@ var GameOver = Class.create(Scene, {
         else
             scale = sw;
 
-        label = new Label("Game Over");
+        label = new Label("Your cow has died");
         label.width = ScreenW;
         label.font = "58px Comic Sans MS";
         label.textAlign = "center";
@@ -52,7 +52,8 @@ var GameOver = Class.create(Scene, {
         bg.image = game.assets["img/grass2.png"];
         bg.addEventListener(Event.TOUCH_END, function(e)
         {
-            world.loadnormalgame();
+            world.game.replaceScene(world.scene);
+            world.load_level(world.current_level);
         });
 
         tick = 0;
