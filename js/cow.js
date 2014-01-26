@@ -1,10 +1,10 @@
 
 var Cow = Class.create(Animal, {
-    initialize : function(pos) {
+    initialize : function(pos, scale) {
         Animal.call(this, 64, 64,
             "cow",
             18,
-            pos, 30, 120);
+            pos, 30, 120, scale);
     },
 
     smell: function (a) {

@@ -1,9 +1,9 @@
 var Beaver = Class.create(Animal, {
-    initialize : function(pos) {
+    initialize : function(pos, scale) {
         Animal.call(this, 64, 64,
             "beaver",
             9,
-            pos, 30, 190);
+            pos, 30, 190, scale);
     },
 
     smell: function(a) {

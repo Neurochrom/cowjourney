@@ -1,7 +1,7 @@
 var animalId = 0;
 var Animal = Class.create(Sprite, {
 
-    initialize : function(width, height, type, headOff, pos, rCol, rSense) {
+    initialize : function(width, height, type, headOff, pos, rCol, rSense, scale) {
         //alert( " Animal");
         Sprite.call(this, width, height);
         this.id = animalId++;
@@ -25,6 +25,9 @@ var Animal = Class.create(Sprite, {
         this.ass.image = assImage;
         this.ass.pos = this.pos.addV(new Vec2(0,this.headOff));
         world.addAnimal(this, this.ass);
+
+        this.scale(scale.x, scale.y);
+        this.ass.scale(scale.x, scale.y);
 
         this.addEventListener("enterframe", function(){
             if(this.bleed) {

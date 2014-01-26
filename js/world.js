@@ -134,13 +134,13 @@ var world = (function(){
                         path = 'house.png'
                         break;
                     case 20:
-                        var a1 = new Player(this.field_size.mulV(new Vec2(j, i)));
+                        var a1 = new Player(field_position, newscale);
                         continue;
                     case 30:
-                        new Cow(this.field_size.mulV(new Vec2(j, i)));
+                        new Cow(field_position, newscale);
                         continue;
                     case 40:
-                        new Beaver(this.field_size.mulV(new Vec2(j, i)));
+                        new Beaver(field_position, newscale);
                         continue;
                 }
 
