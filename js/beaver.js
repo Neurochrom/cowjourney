@@ -3,10 +3,16 @@ var Beaver = Class.create(Animal, {
         Animal.call(this, 64, 64,
             "beaver",
             9,
-            pos, 30, 120);
+            pos, 30, 190);
     },
 
     smell: function(a) {
-        var xxx=2;
+        if (a.type == "cow") {
+            this.followedObject = a;
+        }
+    },
+    onColidedWith : function(a) {
+        if (a.type == "cow")
+            a.onDie();
     }
 });

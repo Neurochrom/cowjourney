@@ -22,11 +22,16 @@ var Animal = Class.create(Sprite, {
         var assImage = world.game.assets["img/"+type+"_ass.png"];
         this.ass = new Sprite(width, height);
         this.ass.image = assImage;
-        this.ass.pos = this.pos.addV(new Vec2(0,headOff));
+        this.ass.pos = this.pos.addV(new Vec2(0,this.headOff));
         world.addAnimalsAss(this.ass);
         world.addAnimal(this);
 
         this.addEventListener("enterframe", function(){
+            if(this.bleed) {
+                world.par.blood(this.pos);
+            }
+
+
             if(this.followedObject){
                 var to_be = this.center().addV(this.speed);
                 var to_be = this.center();
@@ -61,10 +66,17 @@ var Animal = Class.create(Sprite, {
             this.frame += (this.age % 5 == 0) ? 1 : 0;
             if(this.frame > 10) this.frame = 0;
             this.ass.pos = this.pos.subV(this.speed.mulV(this.speed.mulV(this.speed)))
-                               .addV(new Vec2(0,headOff));
+                               .addV(new Vec2(0,this.headOff));
             this.rotate((Math.sin(this.age/this.rotationDiv - this.rotationDiv / 2)*this.rotationMul));
             var tmp = this.speed.length();
             this.ass.rotate(0.2 * Math.sin(tmp * this.age * 10));
+
+            if (this.dead) {
+                this.speed = this.speed.mulS(0);
+                this._rotation = 180;
+                this.frame = 4;
+                return;
+            }
 
         });
     },
@@ -76,13 +88,24 @@ var Animal = Class.create(Sprite, {
 
     rCol : 0,
     rSense : 0,
-    vel : "x",
+    headOff : 16,
     followedObject : null,
     stunned : 0,    // for this many frames the animal will not follow anyone
     type : "",
-    isPlayer: 0,
-    groupie: null,
-    smell: function(a) {
+    isPlayer : 0,
+    groupie : null,
+    smell : function(a) {
+    },
+    onColidedWith : function(a) {
+        stun(this);
+    },
+    bleed : 0,
+    dead : 0,
+    onDie : function() {
+        this.dead = 1;
+        this.bleed = 1;
+        //world.par.slaughter(this.pos);
+        this.headOff = -4;
     }
 });
 
@@ -134,7 +157,7 @@ world.resolveCollisions = function(colliding) {
 };
 
 var stun = function(a1) {
-    if(a1.isPlayer) {
+    if(!a1.isPlayer) {
         //a1.followedObject = null;
         if(a1.followedObject.isPlayer)
             a1.stunned = 60;
@@ -142,9 +165,10 @@ var stun = function(a1) {
             a1.stunned = 10;
     }
 }
+
 var pseudoPhysicalCol = function(a1, a2) {
-    stun(a1);
-    stun(a2);
+    a1.onColidedWith(a2);
+    a2.onColidedWith(a1);
 
     var to = a1.center().subV(a2.center());
     var n = new Vec2(to.x, to.y);
