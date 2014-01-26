@@ -64,13 +64,27 @@ var world = (function(){
     this.readMap = function(map){
         var maps_size = new Vec2(map[0].length, map.length);
         this.field_size = this.size.divV(maps_size.mulS(1.05));
-
-        if(this.field_size.x < this.field_size.y)
+        var hor = false;
+        if(this.field_size.x < this.field_size.y){
             this.field_size.y = this.field_size.x;
-        else
+            hor = true;
+        }else{
             this.field_size.x = this.field_size.y;
+        }
 
         this.padding = this.size.subV(this.field_size.mulV(maps_size)).mulS(0.5);
+
+        if(hor){
+            document.getElementById("gradient_a").className = "gradient gradientTop";
+            document.getElementById("gradient_b").className = "gradient gradientBottom";
+            document.getElementById("gradient_a").style.bottom = (this.size.y - this.padding.y) + "px";
+            document.getElementById("gradient_b").style.top = (this.size.y - this.padding.y) + "px";
+        }else{
+            document.getElementById("gradient_a").className = "gradient gradientLeft";
+            document.getElementById("gradient_b").className = "gradient gradientRight";
+            document.getElementById("gradient_a").style.right = (this.size.x - this.padding.x) + "px";
+            document.getElementById("gradient_b").style.left = (this.size.x - this.padding.x) + "px";
+        }
         for(var i = 0; i < map.length; i++){
             this.obstacles[i] = {};
 
