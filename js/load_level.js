@@ -41,13 +41,14 @@ world.load_level = function(lvl_n) {
 	switch(lvl_n)
 	{
         case 1:
-            world.readMap([[13,6,6,14,6,6,6,10],
-                [11,20,30,11,0,17,0,11],
-                [11,0,13,8,10,0,0,11],
-                [11,0,3,30,7,2,0,11],
+            world.readMap([[13,6,14,6,6,6,6,10],
+                [11,30,11,0,0,17,0,11],
+                [11,20,15,6,10,0,0,11],
+                [11,0,3,30,3,0,0,11],
                 [11,0,0,0,0,0,0,11],
                 [7,6,6,6,6,6,6,4],
             ]);
+
             break;
 		case 2:
 
@@ -181,4 +182,7 @@ world.load_level = function(lvl_n) {
         default:
             world.game.replaceScene(new GameWon());
 	}
+
+    //AddMessage("Level", new Vec2(0, 0), new Vec2(600, 0), 100, "#FFF");
+
 }
