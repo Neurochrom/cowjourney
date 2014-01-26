@@ -22,10 +22,19 @@ world.registerOnClick({}, function(e, par){
     //first variable is a
     world.music.play(g_SoundEffect.Cow);
 
-    if(Math.random() > 0.9)
-        AddMessage("MOOO!!! BITCH!!!", new Vec2(e.x, e.y), new Vec2(e.x, e.y-100), 80, "#FFF");
-    else
+    var random = Math.random();
+    if(random < 0.5)
         AddMessage("moo!", new Vec2(e.x, e.y), new Vec2(e.x, e.y-100), 80, "#FFF");
+    else if(random < 0.6)
+        AddMessage("MOOO!!! BITCH!!!", new Vec2(e.x, e.y), new Vec2(e.x, e.y-100), 80, "#FFF");
+    else if(random < 0.7)
+        AddMessage("fill this later", new Vec2(e.x, e.y), new Vec2(e.x, e.y-100), 80, "#FFF");
+    else if(random < 0.8)
+        AddMessage("Milk me", new Vec2(e.x, e.y), new Vec2(e.x, e.y-100), 80, "#FFF");
+    else if(random < 0.9)
+        AddMessage("More grass, more milk!", new Vec2(e.x, e.y), new Vec2(e.x, e.y-100), 80, "#FFF");
+    else if(random >= 0.9)
+        AddMessage("Moo, Sir!", new Vec2(e.x, e.y), new Vec2(e.x, e.y-100), 80, "#FFF");
 
 });
 world.registerPreload('img/grass1.png');

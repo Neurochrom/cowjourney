@@ -100,12 +100,19 @@ var world = (function(){
                 var img = world.game.assets['img/' + path];
                 var sprite = new Sprite(img.width, img.height);
                 sprite.image = img;
-                
-                var padding = 0.02;
-                var paddedField = this.field_size.mulS(1 + padding * 2);
 
-                sprite.scale(paddedField.x / img.width, paddedField.y / img.height);
-                sprite.pos = this.field_size.mulV(new Vec2(j * (1 - padding),i * (1 - padding)));
+                // wypieprzony padding Piotra
+                //var padding = 0.02;
+                //var paddedField = this.field_size.mulS(1 + padding * 2);
+
+                //sprite.scale(paddedField.x / img.width, paddedField.y / img.height);
+                //sprite.pos = this.field_size.mulV(new Vec2(j * (1 - padding),i * (1 - padding)));
+
+                var newscale = new Vec2(this.field_size.x/ img.width, this.field_size.y/ img.height);
+                sprite.scale(newscale.x, newscale.y);
+                var diffScale = new Vec2((newscale.x*img.width - img.width) / 2,
+                                         (newscale.y*img.height - img.height) / 2);
+                sprite.pos = this.field_size.mulV(new Vec2(j, i)).addV(diffScale);
 
                 this.obstacles[i][j] = sprite;
                 this.scene.addChild(sprite);
