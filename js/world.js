@@ -85,6 +85,32 @@ var world = (function(){
                     (newscale.y*h - h) / 2);
                 var field_position = this.field_size.mulV(new Vec2(j, i)).addV(this.diffScale).addV(this.padding);
                 switch(map[i][j]){
+                    case 0:   continue;
+                    case 17:  continue;
+                    case 20:  continue;
+                    case 30:  continue;
+                    case 40:  continue;
+                    case 50:   continue;
+                }
+                var img = world.game.assets['img/shadow.png'];
+                var shadow = new Sprite(img.width, img.height);
+                shadow.image = img;
+
+                shadow.scale(newscale.x, newscale.y);
+                shadow.pos = field_position.subV(new Vec2(field_size.x * 0.5,0));
+
+                this.scene.addChild(shadow);
+            }
+            for(var j = 0; j < map[i].length; j++){
+
+                var path = null;
+                var h = 64;
+                var w = 64;
+                var newscale = new Vec2(this.field_size.x/ w, this.field_size.y/ h);
+                this.diffScale = new Vec2((newscale.x*w - w) / 2,
+                    (newscale.y*h - h) / 2);
+                var field_position = this.field_size.mulV(new Vec2(j, i)).addV(this.diffScale).addV(this.padding);
+                switch(map[i][j]){
                     case 0:                          continue;
                     case 1:   path = 'camp.png'    ;    break;
                     case 2:   path = 'wood_l.png'  ;    break;
@@ -117,6 +143,7 @@ var world = (function(){
                 sprite.pos = field_position;
 
                 this.obstacles[i][j] = sprite;
+
                 this.scene.addChild(sprite);
             }
         }
@@ -177,6 +204,7 @@ var world = (function(){
         this.game.preload("img/cow_ass.png");
         this.game.preload("img/beaver_animation.png");
         this.game.preload("img/beaver_ass.png");
+        this.game.preload("img/shadow.png");
         this.game.preload("img/nkbeaver_animation.png");
         this.game.preload("img/nkbeaver_ass.png");
 
