@@ -49,7 +49,8 @@ var world = (function(){
     };
 
     this.isObstacleAt = function(pos){
-        var p = pos.divV(this.field_size);
+        var p = pos.subV(this.diffScale).subV(this.padding).divV(this.field_size);
+
         if(this.obstacles[Math.floor(p.y)] && this.obstacles[Math.floor(p.y)][Math.floor(p.x)])
             return true;
         return false;
@@ -57,6 +58,7 @@ var world = (function(){
 
     this.field_size = null;
     this.padding = new Vec2(0,0);
+    this.diffScale = new Vec2(0,0);
     this.readMap = function(map){
         var maps_size = new Vec2(map[0].length, map.length);
         this.field_size = this.size.divV(maps_size.mulS(1.05));
@@ -76,9 +78,9 @@ var world = (function(){
                 var h = 64;
                 var w = 64;
                 var newscale = new Vec2(this.field_size.x/ w, this.field_size.y/ h);
-                var diffScale = new Vec2((newscale.x*w - w) / 2,
+                this.diffScale = new Vec2((newscale.x*w - w) / 2,
                     (newscale.y*h - h) / 2);
-                var field_position = this.field_size.mulV(new Vec2(j, i)).addV(diffScale).addV(this.padding);
+                var field_position = this.field_size.mulV(new Vec2(j, i)).addV(this.diffScale).addV(this.padding);
                 switch(map[i][j]){
                     case 0:
                         continue;
