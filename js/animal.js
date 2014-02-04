@@ -38,22 +38,22 @@ var Animal = Class.create(Sprite, {
                     world.music.play(g_SoundEffect.Blood);
             }
 
-            if(true){
-                var to_be = this.center();
 
-                if(world.isObstacleAt(to_be.addV(new Vec2(this.rCol * this.scaleV.x,0)))){
-                    if (this.speed.x>0) this.speed.x = 0;
-                }
-                if(world.isObstacleAt(to_be.addV(new Vec2(0,this.rCol * this.scaleV.y)))){
-                    if (this.speed.y>0) this.speed.y = 0;
-                }
-                if(world.isObstacleAt(to_be.subV(new Vec2(this.rCol * this.scaleV.x,0)))){
-                    if (this.speed.x<0) this.speed.x = 0;
-                }
-                if(world.isObstacleAt(to_be.subV(new Vec2(0,this.rCol * this.scaleV.y)))){
-                    if (this.speed.y<0) this.speed.y = 0;
-                }
+            var to_be = this.center();
+
+            if(world.isObstacleAt(to_be.addV(new Vec2(this.rCol * this.scaleV.x,0)))){
+                if (this.speed.x>0) this.speed.x = 0;
             }
+            if(world.isObstacleAt(to_be.addV(new Vec2(0,this.rCol * this.scaleV.y)))){
+                if (this.speed.y>0) this.speed.y = 0;
+            }
+            if(world.isObstacleAt(to_be.subV(new Vec2(this.rCol * this.scaleV.x,0)))){
+                if (this.speed.x<0) this.speed.x = 0;
+            }
+            if(world.isObstacleAt(to_be.subV(new Vec2(0,this.rCol * this.scaleV.y)))){
+                if (this.speed.y<0) this.speed.y = 0;
+            }
+
             this.pos = this.pos.addV(this.speed.mulV(this.scaleV));
             this.speed = this.speed.mulS(this.speed.lengthSqr() > this.rCol ? 0.6 : 0.96);
             if (this.followedObject) {
